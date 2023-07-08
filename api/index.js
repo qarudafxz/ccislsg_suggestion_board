@@ -27,8 +27,8 @@ app.use(morgan("tiny"));
 app.disable("x-powered-by");
 
 //routes
-app.use("/server/sug", SuggestionRoute);
-app.use("/server/auth", AuthRouter);
+app.use("/api/sug", SuggestionRoute);
+app.use("/api/auth", AuthRouter);
 
 try {
 	mongoose
