@@ -1,6 +1,6 @@
 import { Sug } from "../models/Sug.js";
 import { User } from "../models/User.js";
-import { filter as SWEAR } from "../utils/filter.js";
+import { filterWords } from "../helpers/filterWords.js";
 
 export const addSuggestion = async (req, res) => {
 	const { id } = req.params;
@@ -12,28 +12,15 @@ export const addSuggestion = async (req, res) => {
 			return res.status(400).json({ message: "User does not exist" });
 		}
 
-		console.log(user.canSuggest);
-
-		if (!user.canSuggest) {
-			return res
-				.status(400)
-				.json({ message: "You can only suggest twice a day. Comeback tomorrow!" });
-		}
-
 		if (!suggestion) {
 			return res.status(400).json({ message: "Please enter a suggestion" });
 		}
 
 		const suggestionToLower = suggestion.toLowerCase();
-		const hasSwearWord = SWEAR.some((word) => suggestionToLower.includes(word));
 
-		if (hasSwearWord) {
-			return res
-				.status(400)
-				.json({ message: "Please do not include explicit/bad words" });
+		if (filterWords(suggestionToLower)) {
+			return res.status(400).json({ message: "Please do not use swear words" });
 		}
-
-		user.numberOfSuggestions += 1;
 
 		const today = new Date();
 		const suggestionToday = await Sug.findOne({
@@ -51,10 +38,23 @@ export const addSuggestion = async (req, res) => {
 			},
 		});
 
+		console.log(suggestionToday);
+
 		//if there will be a suggestion being returned from the database, it means that the user has already suggested today
 		suggestionToday ? (user.canSuggest = false) : (user.canSuggest = true);
 
+		console.log(user.canSuggest);
+
+		if (!user.canSuggest) {
+			return res
+				.status(400)
+				.json({ message: "You can only suggest once a day. Comeback tomorrow!" });
+		}
+
+		user.numberOfSuggestions += 1;
+
 		const newSuggestion = new Sug({ creatorID: user._id, subject, suggestion });
+
 		await newSuggestion.save();
 		await user.save();
 
