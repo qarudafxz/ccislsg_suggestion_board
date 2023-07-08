@@ -82,7 +82,7 @@ function Home() {
 					</motion.div>
 					<motion.div
 						animate={{ y: [0, 50, 0] }}
-						transition={{ duration: 4, repeat: Infinity }}
+						transition={{ duration: 4, repeat: Infinity, delay: 1.1 }}
 						className='absolute z-10 bottom-32 right-40'>
 						<img
 							className='pointer-events-none xxxs:hidden md:block w-48 h-auto -rotate-45'
