@@ -16,7 +16,7 @@ import { motion } from "framer-motion";
 function Home() {
 	return (
 		<div
-			className='font-main'
+			className='font-main overflow-hidden'
 			style={{
 				backgroundImage: `url(${Bg})`,
 				backgroundRepeat: "no-repeat",
@@ -61,10 +61,9 @@ function Home() {
 					<motion.button
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
-						transition={{ delay: 1.7, duration: 1 }}
-						className='relative z-50'>
+						transition={{ delay: 1.7, duration: 1 }}>
 						<Link to='/signup'>
-							<button className='bg-white text-primary font-semibold py-2 px-4 rounded-full mt-8 cursor-pointer hover:bg-primary duration-150'>
+							<button className=' bg-white text-primary font-semibold py-2 px-4 rounded-full mt-8 cursor-pointer hover:bg-primary duration-150'>
 								Get Started
 							</button>
 						</Link>

@@ -69,8 +69,8 @@ function Navbar() {
 							animate={{ x: 50 }}
 							exit={{ x: 1000 }}
 							transition={{ duration: 0.3 }}
-							className='absolute z-40 top-0 w-full h-full bg-zinc-600 text-white'>
-							<div className='flex flex-col gap-6 pt-40 pl-8'>
+							className='absolute z-40 top-0 w-full h-full bg-primary text-white'>
+							<div className='flex flex-col gap-6 pt-52 pl-8'>
 								{menu?.map((item, index) => {
 									return (
 										<Link
@@ -97,6 +97,7 @@ function Navbar() {
 							className='w-14 h-14'
 						/>
 					</Link>
+
 					<div className='flex gap-6 pt-8'>
 						{menu?.map((item, index) => {
 							return (
