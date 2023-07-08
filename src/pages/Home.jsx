@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 //assets
 import Bg from "../assets/bg.svg";
+import twirl from "../assets/twirl.png";
+import circ from "../assets/circle.png";
 //components
 import Head from "../components/Head";
 import Navbar from "../components/Navbar";
@@ -68,8 +70,29 @@ function Home() {
 							</button>
 						</Link>
 					</motion.button>
+					<motion.div
+						animate={{ y: [0, 35, 0] }}
+						transition={{ duration: 4, repeat: Infinity }}
+						className='absolute z-10 top-32'>
+						<img
+							className='pointer-events-none xxxs:hidden md:block w-48 h-auto'
+							src={twirl}
+							alt='twirl'
+						/>
+					</motion.div>
+					<motion.div
+						animate={{ y: [0, 50, 0] }}
+						transition={{ duration: 4, repeat: Infinity }}
+						className='absolute z-10 bottom-32 right-40'>
+						<img
+							className='pointer-events-none xxxs:hidden md:block w-48 h-auto -rotate-45'
+							src={circ}
+							alt='circ'
+						/>
+					</motion.div>
 				</div>
 			</div>
+
 			<Footer />
 		</div>
 	);
