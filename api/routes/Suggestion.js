@@ -1,8 +1,17 @@
 import express from "express";
-import { addSuggestion } from "../controllers/addSuggestion.js";
 
-const route = express.Router();
+//controllers
+import {
+	addSuggestion,
+	editSuggestion,
+} from "../controllers/suggestionFuncs.js";
 
-route.post("/suggest/:id", addSuggestion);
+//middlewares
+import { isAuthenticated } from "../middlewares/isAuth.js";
 
-export { route as SuggestionRoute };
+const router = express.Router();
+
+router.post("/suggest/:id", isAuthenticated, addSuggestion);
+router.put("/edit-suggest/:id", isAuthenticated, editSuggestion);
+
+export { router as SuggestionRoute };
