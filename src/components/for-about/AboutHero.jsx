@@ -46,7 +46,7 @@ function AboutHero() {
 					<img
 						src={char}
 						alt='3D Character'
-						className=''
+						className='pointer-events-none'
 					/>
 				</motion.div>
 			</div>

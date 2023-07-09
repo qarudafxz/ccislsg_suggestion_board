@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import logo from "../assets/logo.png";
 
@@ -7,6 +7,8 @@ import TopLoadingBar from "react-top-loading-bar";
 import { buildUrl } from "../utils/buildUrl.js";
 
 function Login() {
+	const { error } = useParams();
+	const [message, setMessage] = useState(error || "");
 	const navigate = useNavigate();
 	const [progress, setProgress] = useState(0);
 	const [incorrectEmail, setIncorrectEmail] = useState("");
@@ -83,8 +85,15 @@ function Login() {
 				setIncorrectEmail("");
 			}, 3000);
 		}
-	}, [incorrectPassword, incorrectEmail]);
 
+		if (message) {
+			setTimeout(() => {
+				setMessage("");
+			}, 3000);
+		}
+	}, [incorrectPassword, incorrectEmail, message]);
+
+	console.log(message);
 	return (
 		<div className='font-main xxxxs:px-8 md:px-32'>
 			<TopLoadingBar
@@ -94,6 +103,7 @@ function Login() {
 				height={7}
 			/>
 			<div className='xxxs:flex flex-col gap-4 md:grid grid-cols-2'>
+				{message && <p>{message}</p>}
 				<form
 					onSubmit={handleLogin}
 					className='xxxs:mt-56'>
