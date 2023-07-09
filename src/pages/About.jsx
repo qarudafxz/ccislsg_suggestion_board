@@ -3,10 +3,10 @@ import React from "react";
 //components
 import Head from "../components/Head";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 //sections
 import AboutHero from "../components/for-about/AboutHero";
+import Partners from "../components/for-about/Partners";
 
 //assets
 import Bg from "../assets/bg.svg";
@@ -33,8 +33,9 @@ function About() {
 					overflowY: "auto",
 				}}>
 				<AboutHero />
+				<Partners />
+				{/* officers component */}
 			</div>
-			<Footer />
 		</div>
 	);
 }

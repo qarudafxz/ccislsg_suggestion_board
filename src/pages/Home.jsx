@@ -8,7 +8,6 @@ import circ from "../assets/circle.png";
 //components
 import Head from "../components/Head";
 import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
 
 //icons
 import { IoMegaphoneSharp } from "react-icons/io5";
@@ -18,7 +17,7 @@ import { motion } from "framer-motion";
 function Home() {
 	return (
 		<div
-			className='font-main overflow-hidden'
+			className='font-main overflow-y-hidden'
 			style={{
 				backgroundImage: `url(${Bg})`,
 				backgroundRepeat: "no-repeat",
@@ -92,8 +91,6 @@ function Home() {
 					</motion.div>
 				</div>
 			</div>
-
-			<Footer />
 		</div>
 	);
 }

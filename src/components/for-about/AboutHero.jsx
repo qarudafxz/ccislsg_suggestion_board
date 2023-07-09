@@ -1,9 +1,13 @@
 import React from "react";
 
+import char from "../../assets/character.png";
+
+import { motion } from "framer-motion";
+
 function AboutHero() {
 	return (
 		<div className='xxxs:px-10 md:px-32 lg:px-36'>
-			<div className='mt-24 xxxs:flex gap-10 md:grid grid-cols-2 gap-8'>
+			<div className='mt-24 xxxs:flex flex-col-reverse gap-10 md:grid grid-cols-2 gap-8'>
 				<div className='flex flex-col gap-8'>
 					<h1 className='font-bold text-orange-900 xxxs:text-3xl md:text-4xl lg:text-7xl'>
 						About CCISLSG{" "}
@@ -32,13 +36,19 @@ function AboutHero() {
 						<p>
 							We encourage students to engage in thoughtful discussions, collaborate
 							with peers, and work hand in hand with the student government to bring
-							about positive change. Together, we can transform our college into a
-							vibrant and inclusive community that nurtures growth, fosters creativity,
-							and prioritizes the well-being of all CCIS students. Join us today and
-							leave your mark on the future of our college!
+							about positive change.
 						</p>
 					</div>
 				</div>
+				<motion.div
+					animate={{ y: [0, 30, 0] }}
+					transition={{ duration: 4, repeat: Infinity }}>
+					<img
+						src={char}
+						alt='3D Character'
+						className=''
+					/>
+				</motion.div>
 			</div>
 		</div>
 	);

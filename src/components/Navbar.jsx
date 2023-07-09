@@ -35,7 +35,7 @@ function Navbar() {
 	return (
 		<div>
 			{/* for mobile */}
-			<div className='xxxs:block sm:hidden'>
+			<div className='xxxs:block overflow-none sm:hidden'>
 				<div className='px-12 flex justify-between items-center mt-4'>
 					<Link
 						to='/'
