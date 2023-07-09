@@ -69,15 +69,16 @@ export const login = async (req, res) => {
 		const user = await User.findOne({ email });
 
 		if (!user) {
-			console.log(messages[1].message);
-			return res.status(400).json({ message: messages[1].message });
+			return res.status(400).json({ message: messages[1].message, type: "email" });
 		}
 
 		const isMatch = await bcrypt.compare(password, user.password);
 
 		if (!isMatch) {
 			console.log(messages[2].message);
-			return res.status(400).json({ message: messages[2].message });
+			return res
+				.status(400)
+				.json({ message: messages[2].message, type: "password" });
 		}
 
 		const payload = {

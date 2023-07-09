@@ -9,6 +9,8 @@ import { buildUrl } from "../utils/buildUrl.js";
 function Login() {
 	const navigate = useNavigate();
 	const [progress, setProgress] = useState(0);
+	const [incorrectEmail, setIncorrectEmail] = useState("");
+	const [incorrectPassword, setIncorrectPassword] = useState("");
 	const emailInputRef = useRef();
 	const passwordInputRef = useRef();
 
@@ -33,10 +35,24 @@ function Login() {
 					email,
 					password,
 				}),
-			}).then((res) => {
-				if (res.ok || res.status === 200) {
-					setProgress(100);
-					setTimeout(() => navigate("/"), 2000);
+			}).then(async (res) => {
+				switch (res.status) {
+					case 200:
+						setProgress(100);
+						const userData = await res.json();
+						persistCredentials(userData);
+						setTimeout(() => navigate("/dashboard"), 2000);
+						break;
+
+					case 400:
+						const data = await res.json();
+						if (data?.type === "password") {
+							setIncorrectPassword(data?.message);
+							return;
+						}
+
+						setIncorrectEmail(data?.message);
+						break;
 				}
 			});
 		} catch (err) {
@@ -46,9 +62,28 @@ function Login() {
 		}
 	};
 
+	const persistCredentials = (data) => {
+		localStorage.setItem("token", data?.token);
+		localStorage.setItem("user", data?.user?.username);
+	};
+
 	useEffect(() => {
 		emailInputRef.current.focus();
 	}, []);
+
+	useEffect(() => {
+		if (incorrectPassword) {
+			setTimeout(() => {
+				setIncorrectPassword("");
+			}, 3000);
+		}
+
+		if (incorrectEmail) {
+			setTimeout(() => {
+				setIncorrectEmail("");
+			}, 3000);
+		}
+	}, [incorrectPassword, incorrectEmail]);
 
 	return (
 		<div className='font-main xxxxs:px-8 md:px-32'>
@@ -74,21 +109,26 @@ function Login() {
 					</h1>
 					<h1 className='font-bold xxxs:text-3xl'>Welcome back!</h1>
 					<div className='flex flex-col mt-4'>
+						{incorrectEmail && <p className='text-red-700'>{incorrectEmail}</p>}
 						<label htmlFor='email'>Email</label>
 						<input
 							type='email'
 							required
 							ref={emailInputRef}
-							className='border border-gray-300 rounded-md p-2 mt-4 w-full'
+							className={`border border-gray-300 rounded-md p-2 mt-4 w-full ${
+								incorrectEmail && "border-red-700"
+							}`}
 						/>
 					</div>
 					<div className='flex flex-col mt-4'>
+						{incorrectPassword && <p className='text-red-700'>{incorrectPassword}</p>}
 						<label htmlFor='password'>Password</label>
-
 						<input
 							type='password'
 							required
-							className='border border-gray-300 rounded-md p-2 mt-4 w-full'
+							className={`border border-gray-300 rounded-md p-2 mt-4 w-full ${
+								incorrectPassword && "border-red-700"
+							}`}
 							ref={passwordInputRef}
 						/>
 					</div>
