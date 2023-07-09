@@ -5,13 +5,32 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+const messages = [
+	{
+		message: "Email	already exists",
+	},
+	{
+		message: "User does not exist",
+	},
+	{
+		message: "Incorrect password",
+	},
+	{
+		message: "User registered in successfully",
+	},
+	{
+		message: "User logged in successfully",
+	},
+];
+
 export const register = async (req, res) => {
 	const { username, email, password } = req.body;
 	try {
 		const user = await User.findOne({ email });
 
 		if (user) {
-			return res.status(400).json({ message: "Email already exists" });
+			console.log(messages[0].message);
+			return res.status(400).json({ message: messages[0].message });
 		}
 
 		const genSalt = 10;
@@ -36,9 +55,7 @@ export const register = async (req, res) => {
 			}
 		);
 
-		return res
-			.status(200)
-			.json({ token, newUser, message: "User registered successfully" });
+		return res.status(200).json({ token, newUser, message: messages[3].message });
 	} catch (err) {
 		console.log(err);
 		return res.status(500).json({ message: "Server Error" });
@@ -52,13 +69,15 @@ export const login = async (req, res) => {
 		const user = await User.findOne({ email });
 
 		if (!user) {
-			return res.status(400).json({ message: "User does not exist" });
+			console.log(messages[1].message);
+			return res.status(400).json({ message: messages[1].message });
 		}
 
 		const isMatch = await bcrypt.compare(password, user.password);
 
 		if (!isMatch) {
-			return res.status(400).json({ message: "Invalid credentials" });
+			console.log(messages[2].message);
+			return res.status(400).json({ message: messages[2].message });
 		}
 
 		const payload = {
@@ -69,9 +88,7 @@ export const login = async (req, res) => {
 
 		const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 });
 
-		return res
-			.status(200)
-			.json({ token, message: "User logged in successfully" });
+		return res.status(200).json({ token, user, message: messages[4].message });
 	} catch (err) {
 		console.log(err);
 		return res.status(500).json({ message: "Server Error" });

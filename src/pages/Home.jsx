@@ -42,7 +42,7 @@ function Home() {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						transition={{ delay: 1.1, duration: 1 }}>
-						<h1 className='font-bold text-orange-900 text-center xxxs:text-lg md:text-4xl xl:text-7xl'>
+						<h1 className='font-bold text-orange-900 text-center xxxs:text-3xl md:text-4xl xl:text-7xl'>
 							Let your voices be{" "}
 							<span className='bg-gradient-to-tr from-from to-to bg-clip-text text-transparent'>
 								heard
@@ -84,7 +84,7 @@ function Home() {
 						transition={{ duration: 4, repeat: Infinity, delay: 1.1 }}
 						className='absolute z-10 bottom-32 right-40'>
 						<img
-							className='pointer-events-none xxxs:hidden md:block w-48 h-auto -rotate-45'
+							className='pointer-events-none xxxxs:hidden md:block w-48 h-auto -rotate-45'
 							src={circ}
 							alt='circ'
 						/>

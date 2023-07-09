@@ -1,0 +1,113 @@
+import React, { useState, useRef, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+
+import logo from "../assets/logo.png";
+
+import TopLoadingBar from "react-top-loading-bar";
+import { buildUrl } from "../utils/buildUrl.js";
+
+function Login() {
+	const navigate = useNavigate();
+	const [progress, setProgress] = useState(0);
+	const emailInputRef = useRef();
+	const passwordInputRef = useRef();
+
+	const handleLogin = async (e) => {
+		e.preventDefault();
+		const email = emailInputRef?.current?.value;
+		const password = passwordInputRef?.current?.value;
+
+		setProgress(30);
+		if (!email || !password) {
+			setProgress(100);
+			return;
+		}
+
+		try {
+			await fetch(buildUrl("/auth/login"), {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					email,
+					password,
+				}),
+			}).then((res) => {
+				if (res.ok || res.status === 200) {
+					setProgress(100);
+					setTimeout(() => navigate("/"), 2000);
+				}
+			});
+		} catch (err) {
+			console.log(err);
+		} finally {
+			setProgress(100);
+		}
+	};
+
+	useEffect(() => {
+		emailInputRef.current.focus();
+	}, []);
+
+	return (
+		<div className='font-main xxxxs:px-8 md:px-32'>
+			<TopLoadingBar
+				color='#FF7800'
+				progress={progress}
+				onLoaderFinished={() => setProgress(0)}
+				height={7}
+			/>
+			<div className='xxxs:flex flex-col gap-4 md:grid grid-cols-2'>
+				<form
+					onSubmit={handleLogin}
+					className='xxxs:mt-56'>
+					<Link to='/'>
+						<img
+							src={logo}
+							alt='CCISLSG Logo'
+							className='my-4 xxxs:w-20 h-20'
+						/>
+					</Link>
+					<h1 className='text-primary font-semibold xxxs:'>
+						CCISLSG Suggestion Board
+					</h1>
+					<h1 className='font-bold xxxs:text-3xl'>Welcome back!</h1>
+					<div className='flex flex-col mt-4'>
+						<label htmlFor='email'>Email</label>
+						<input
+							type='email'
+							required
+							ref={emailInputRef}
+							className='border border-gray-300 rounded-md p-2 mt-4 w-full'
+						/>
+					</div>
+					<div className='flex flex-col mt-4'>
+						<label htmlFor='password'>Password</label>
+
+						<input
+							type='password'
+							required
+							className='border border-gray-300 rounded-md p-2 mt-4 w-full'
+							ref={passwordInputRef}
+						/>
+					</div>
+					<button
+						onClick={handleLogin}
+						className='w-full bg-primary py-2 text-center text-white font-semibold rounded-md mt-4'>
+						Log in
+					</button>
+					<p className='mt-4 text-zinc-400'>
+						Don't have an account?{" "}
+						<span className='underline text-primary'>
+							<Link to='/signup'>Sign Up</Link>
+						</span>
+					</p>
+				</form>
+				<img />
+			</div>
+		</div>
+	);
+}
+
+export default Login;

@@ -99,3 +99,5 @@ export const editSuggestion = async (req, res) => {
 		return res.status(500).json({ message: "Server Error" });
 	}
 };
+
+//delete suggestion
