@@ -88,18 +88,18 @@ function Login() {
 
 	console.log(message);
 	return (
-		<div className='font-main xxxxs:px-8 md:px-32'>
+		<div className='font-main'>
 			<TopLoadingBar
 				color='#FF7800'
 				progress={progress}
 				onLoaderFinished={() => setProgress(0)}
 				height={7}
 			/>
-			<div className='xxxs:flex flex-col gap-4 md:grid grid-cols-2'>
+			<div className='xxxs:flex'>
 				{message && <p>{message}</p>}
 				<form
 					onSubmit={handleLogin}
-					className='xxxs:mt-56 md:w-10/12 lg:w-7/12'>
+					className='xxxs:mt-56 px-8 xs:w-full md:w-10/12 lg:w-5/12'>
 					<Link to='/'>
 						<img
 							src={logo}
@@ -112,7 +112,6 @@ function Login() {
 					</h1>
 					<h1 className='font-bold xxxs:text-3xl'>Welcome back!</h1>
 					<div className='flex flex-col mt-4'>
-						{incorrectEmail && <p className='text-red-700'>{incorrectEmail}</p>}
 						<label htmlFor='email'>Email</label>
 						<input
 							type='email'
@@ -122,9 +121,9 @@ function Login() {
 								incorrectEmail && "border-red-700"
 							}`}
 						/>
+						{incorrectEmail && <p className='text-red-700 mt-2'>{incorrectEmail}</p>}
 					</div>
 					<div className='flex flex-col mt-4'>
-						{incorrectPassword && <p className='text-red-700'>{incorrectPassword}</p>}
 						<label htmlFor='password'>Password</label>
 						<input
 							type='password'
@@ -134,6 +133,9 @@ function Login() {
 							}`}
 							ref={passwordInputRef}
 						/>
+						{incorrectPassword && (
+							<p className='text-red-700 mt-2'>{incorrectPassword}</p>
+						)}
 					</div>
 					<button
 						onClick={handleLogin}
@@ -150,7 +152,7 @@ function Login() {
 				<img
 					src={LoginBg}
 					alt='Login Background Picture churmehi'
-					className='xxxxs:hidden md:block h-screen w-full	object-cover '
+					className='xxxxs:hidden md:block h-screen w-full	object-cover'
 				/>
 			</div>
 		</div>
