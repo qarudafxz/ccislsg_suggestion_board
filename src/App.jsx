@@ -6,6 +6,8 @@ import { Analytics } from "@vercel/analytics/react";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+
 import UserDashboard from "./pages/suggestions/UserDashboard";
 
 //components
@@ -28,9 +30,13 @@ function App() {
 					element={<Login />}
 				/>
 				<Route
+					path='/signup'
+					element={<Signup />}
+				/>
+				<Route
 					path='/*'
 					element={
-						<div className='font-primary md:flex flex-row'>
+						<div className='font-main md:flex flex-row'>
 							<SideNavbar />
 							<Routes>
 								<Route

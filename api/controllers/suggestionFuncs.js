@@ -38,12 +38,18 @@ export const addSuggestion = async (req, res) => {
 			},
 		});
 
-		console.log(suggestionToday);
-
 		//if there will be a suggestion being returned from the database, it means that the user has already suggested today
 		suggestionToday ? (user.canSuggest = false) : (user.canSuggest = true);
 
-		console.log(user.canSuggest);
+		//initialize 24 hours timer with a format of hh:mm:ss
+		const timer = new Date().toLocaleTimeString("en-US", {
+			hour12: false,
+			hour: "numeric",
+			minute: "numeric",
+			second: "numeric",
+		});
+
+		console.log(timer);
 
 		if (!user.canSuggest) {
 			return res

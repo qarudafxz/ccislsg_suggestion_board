@@ -4,7 +4,8 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import logo from "../assets/logo.png";
 
 import TopLoadingBar from "react-top-loading-bar";
-import { buildUrl } from "../utils/buildUrl.js";
+
+import { authLogin } from "../utils/fetchers/Login.js";
 
 function Login() {
 	const { error } = useParams();
@@ -28,16 +29,7 @@ function Login() {
 		}
 
 		try {
-			await fetch(buildUrl("/auth/login"), {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					email,
-					password,
-				}),
-			}).then(async (res) => {
+			authLogin(email, password).then(async (res) => {
 				switch (res.status) {
 					case 200:
 						setProgress(100);
