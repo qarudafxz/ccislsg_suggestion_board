@@ -30,7 +30,7 @@ function SideNavbar() {
 								animate={{ x: 0 }}
 								exit={{ x: -1000 }}
 								transition={{ duration: 0.3 }}
-								className='xxxxs:block pt-14 pl-10 pr-6 bg-primary w-9/12 h-screen sm:hidden'>
+								className='xxxxs:block pt-14 pl-10 pr-6 bg-[#ea580c] w-9/12 h-screen sm:hidden'>
 								<div className='flex flex-col gap-10'>
 									<img
 										src={Logo}

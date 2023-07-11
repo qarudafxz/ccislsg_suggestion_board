@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import logo from "../assets/logo.png";
+import LoginBg from "../assets/login-bg.jpg";
 
 import TopLoadingBar from "react-top-loading-bar";
 
@@ -9,7 +10,7 @@ import { authLogin } from "../utils/fetchers/Login.js";
 
 function Login() {
 	const { error } = useParams();
-	const [message, setMessage] = useState(error || "");
+	const [message, setMessage] = useState(error || undefined);
 	const navigate = useNavigate();
 	const [progress, setProgress] = useState(0);
 	const [incorrectEmail, setIncorrectEmail] = useState("");
@@ -98,7 +99,7 @@ function Login() {
 				{message && <p>{message}</p>}
 				<form
 					onSubmit={handleLogin}
-					className='xxxs:mt-56'>
+					className='xxxs:mt-56 md:w-10/12 lg:w-7/12'>
 					<Link to='/'>
 						<img
 							src={logo}
@@ -146,7 +147,12 @@ function Login() {
 						</span>
 					</p>
 				</form>
-				<img />
+				<img
+					src={LoginBg}
+					alt='Login Background Picture churmehi'
+					className='xxxxs:hidden md:block h-full'
+					style={{ width: "160%", objectFit: "cover" }}
+				/>
 			</div>
 		</div>
 	);
