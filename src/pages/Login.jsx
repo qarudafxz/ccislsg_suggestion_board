@@ -150,8 +150,7 @@ function Login() {
 				<img
 					src={LoginBg}
 					alt='Login Background Picture churmehi'
-					className='xxxxs:hidden md:block h-full'
-					style={{ width: "160%", objectFit: "cover" }}
+					className='xxxxs:hidden md:block h-screen w-full	object-cover '
 				/>
 			</div>
 		</div>
