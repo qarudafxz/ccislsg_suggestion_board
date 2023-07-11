@@ -66,6 +66,7 @@ export const addSuggestion = async (req, res) => {
 
 		return res.status(201).json({
 			newSuggestion,
+			timer,
 			message: "Suggestion added successfully",
 		});
 	} catch (err) {
