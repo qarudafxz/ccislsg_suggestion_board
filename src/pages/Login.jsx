@@ -8,7 +8,10 @@ import TopLoadingBar from "react-top-loading-bar";
 
 import { authLogin } from "../utils/fetchers/Login.js";
 
+import { getToken } from "../helpers/getToken.js";
+
 function Login() {
+	const TOKEN = getToken();
 	const { error } = useParams();
 	const [message, setMessage] = useState(error || undefined);
 	const navigate = useNavigate();
@@ -36,7 +39,7 @@ function Login() {
 						setProgress(100);
 						const userData = await res.json();
 						persistCredentials(userData);
-						setTimeout(() => navigate("/dashboard"), 2000);
+						setTimeout(() => navigate("/all"), 2000);
 						break;
 
 					case 400:
@@ -86,7 +89,6 @@ function Login() {
 		}
 	}, [incorrectPassword, incorrectEmail, message]);
 
-	console.log(message);
 	return (
 		<div className='font-main'>
 			<TopLoadingBar

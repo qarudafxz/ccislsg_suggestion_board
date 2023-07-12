@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { sideMenu as MENU } from "../../data/SideMenu";
+import { sideMenu as MENU, logoutMenu as LOGOUT } from "../../data/SideMenu";
 
 import { SlClose } from "react-icons/sl";
 import { BiMenu } from "react-icons/bi";
@@ -47,18 +47,12 @@ function SideNavbar() {
 													transition={{ duration: 0.3 }}>
 													{item?.icon}
 												</motion.div>
-												{item?.name === "Logout" ? (
-													useEffect(() => {
-														removeData();
-													}, [])
-												) : (
-													<Link
-														key={idx}
-														to={item?.path}
-														className='text-white font-semibold'>
-														{item?.title}
-													</Link>
-												)}
+												<NavLink
+													key={idx}
+													to={item?.path}
+													className='text-white font-semibold'>
+													{item?.title}
+												</NavLink>
 											</div>
 										);
 									})}
@@ -78,6 +72,49 @@ function SideNavbar() {
 						</div>
 					)}
 				</AnimatePresence>
+				{/* pc */}
+				<div className='xxxxs:hidden md:block'>
+					<div className='flex flex-col gap-8 pt-4 bg-[#ea580c] w-full h-screen'>
+						<img
+							src={Logo}
+							alt='CCISLSG Logo'
+							className='w-24 h-24 ml-14'
+						/>
+						{MENU?.map((item, idx) => {
+							return (
+								<div
+									key={idx}
+									className='flex gap-4 items-center'>
+									{item?.name === "Logout" ? (
+										useEffect(() => {
+											removeData();
+										}, [])
+									) : (
+										<NavLink
+											key={idx}
+											to={item?.path}
+											className={({ isActive }) =>
+												"flex gap-6 items-center px-4 py-4 " +
+												(isActive
+													? "bg-[#ffb95c] text-primary font-semibold duration-300 pl-4 border-l-8 border-primary w-full"
+													: "text-white")
+											}>
+											<div className='flex gap-8 items-center pl-10'>
+												<motion.div
+													whileHover={{ x: -10 }}
+													transition={{ duration: 0.3 }}>
+													{item?.icon}
+												</motion.div>
+												{item?.title}
+											</div>
+										</NavLink>
+									)}
+								</div>
+							);
+						})}
+						<button onClick={LOGOUT.fun}>{LOGOUT.title}</button>
+					</div>
+				</div>
 			</div>
 		</>
 	);

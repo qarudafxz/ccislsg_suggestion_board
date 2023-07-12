@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getToken } from "../../helpers/getToken.js";
 
-function UserDashboard() {
+function AllSuggestions() {
 	const navigate = useNavigate();
 	useEffect(() => {
 		if (!getToken()) {
@@ -10,7 +10,7 @@ function UserDashboard() {
 		}
 	}, []);
 
-	return <div>UserDashboard</div>;
+	return <div>AllSuggestions</div>;
 }
 
-export default UserDashboard;
+export default AllSuggestions;

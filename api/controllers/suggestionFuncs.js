@@ -41,34 +41,35 @@ export const addSuggestion = async (req, res) => {
 		//if there will be a suggestion being returned from the database, it means that the user has already suggested today
 		suggestionToday ? (user.canSuggest = false) : (user.canSuggest = true);
 
-		//initialize 24 hours timer with a format of hh:mm:ss
-		const timer = new Date().toLocaleTimeString("en-US", {
-			hour12: false,
-			hour: "numeric",
-			minute: "numeric",
-			second: "numeric",
-		});
-
-		console.log(timer);
-
 		if (!user.canSuggest) {
 			return res
 				.status(400)
 				.json({ message: "You can only suggest once a day. Comeback tomorrow!" });
+
+			//if the user has not been able to suggest today, the user will be able to suggest again after 24 hours
+		} else {
+			//initialize 24 hours timer with a format of hh:mm:ss
+			const timer = new Date();
+			timer.setHours(24, 0, 0, 0);
+
+			user.numberOfSuggestions += 1;
+
+			const newSuggestion = new Sug({ creatorID: user._id, subject, suggestion });
+
+			await newSuggestion.save();
+			await user.save();
+
+			return res.status(201).json({
+				newSuggestion,
+				timer: timer.toLocaleTimeString("en-US", {
+					hour12: false,
+					hour: "numeric",
+					minute: "numeric",
+					second: "numeric",
+				}),
+				message: "Suggestion added successfully",
+			});
 		}
-
-		user.numberOfSuggestions += 1;
-
-		const newSuggestion = new Sug({ creatorID: user._id, subject, suggestion });
-
-		await newSuggestion.save();
-		await user.save();
-
-		return res.status(201).json({
-			newSuggestion,
-			timer,
-			message: "Suggestion added successfully",
-		});
 	} catch (err) {
 		console.log(err);
 		return res.status(500).json({ message: "Server Error" });

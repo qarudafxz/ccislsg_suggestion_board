@@ -7,7 +7,7 @@ export const sideMenu = [
 	{
 		id: 1,
 		title: "All Suggestions",
-		path: "/",
+		path: "/all",
 		icon: (
 			<BsFillMegaphoneFill
 				size={25}
@@ -18,7 +18,7 @@ export const sideMenu = [
 	{
 		id: 2,
 		title: "Your Suggestions",
-		path: "/",
+		path: "/your-suggestions",
 		icon: (
 			<FaClipboardList
 				size={25}
@@ -29,7 +29,7 @@ export const sideMenu = [
 	{
 		id: 3,
 		title: "Report Bug",
-		path: "/",
+		path: "/report",
 		icon: (
 			<IoBugSharp
 				size={25}
@@ -37,15 +37,14 @@ export const sideMenu = [
 			/>
 		),
 	},
-	{
-		id: 4,
-		title: "Logout",
-		path: "/",
-		icon: (
-			<RiLogoutCircleFill
-				size={25}
-				className='text-white'
-			/>
-		),
-	},
 ];
+
+export const logoutMenu = {
+	title: "Logout",
+	fun: () => {
+		localStorage.removeItem("token");
+		localStorage.removeItem("user");
+
+		setTimeout(() => window.location.reload(), 2000);
+	},
+};

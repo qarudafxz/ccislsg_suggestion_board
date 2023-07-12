@@ -8,7 +8,7 @@ import About from "./pages/About";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
-import UserDashboard from "./pages/suggestions/UserDashboard";
+import AllSuggestions from "./pages/suggestions/AllSuggestions";
 
 //components
 import SideNavbar from "./components/side-navbar/SideNavbar";
@@ -40,8 +40,8 @@ function App() {
 							<SideNavbar />
 							<Routes>
 								<Route
-									path='/dashboard'
-									element={<UserDashboard />}
+									path='/all'
+									element={<AllSuggestions />}
 								/>
 							</Routes>
 						</div>
