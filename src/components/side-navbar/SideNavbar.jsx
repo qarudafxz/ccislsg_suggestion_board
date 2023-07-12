@@ -24,7 +24,7 @@ function SideNavbar() {
 				/>
 				<AnimatePresence>
 					{isClicked && (
-						<div className='flex gap-4'>
+						<div className='flex gap-4 absolute top-0 left-0 z-10'>
 							<motion.div
 								initial={{ x: -1000 }}
 								animate={{ x: 0 }}
@@ -56,6 +56,12 @@ function SideNavbar() {
 											</div>
 										);
 									})}
+
+									<button
+										className='border border-white rounded-full px-4 py-2 hoverBtn text-white w-9/12 mx-auto'
+										onClick={LOGOUT.fun}>
+										{LOGOUT.title}
+									</button>
 								</div>
 							</motion.div>
 							<motion.div
@@ -96,7 +102,7 @@ function SideNavbar() {
 											className={({ isActive }) =>
 												"flex gap-6 items-center px-4 py-4 " +
 												(isActive
-													? "bg-[#ffb95c] text-primary font-semibold duration-300 pl-4 border-l-8 border-primary w-full"
+													? "bg-[#ffb95c] text-white font-semibold duration-300 pl-4 border-l-8 border-primary w-full"
 													: "text-white")
 											}>
 											<div className='flex gap-8 items-center pl-10'>
@@ -112,7 +118,11 @@ function SideNavbar() {
 								</div>
 							);
 						})}
-						<button onClick={LOGOUT.fun}>{LOGOUT.title}</button>
+						<button
+							className='border border-white rounded-full px-4 py-2 hoverBtn text-white w-9/12 mx-auto'
+							onClick={LOGOUT.fun}>
+							{LOGOUT.title}
+						</button>
 					</div>
 				</div>
 			</div>

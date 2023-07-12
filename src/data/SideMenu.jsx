@@ -17,7 +17,7 @@ export const sideMenu = [
 	},
 	{
 		id: 2,
-		title: "Your Suggestions",
+		title: "Ur Suggestions",
 		path: "/your-suggestions",
 		icon: (
 			<FaClipboardList

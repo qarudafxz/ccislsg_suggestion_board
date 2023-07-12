@@ -37,3 +37,9 @@
 .mouseHover:hover::after {
  width: 100%;
 }
+
+.hoverBtn:hover {
+ background-color: #fff;
+ color: #FF7800;
+ transition: 0.5s;
+}

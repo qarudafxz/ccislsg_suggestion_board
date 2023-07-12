@@ -26,7 +26,10 @@ function Login() {
 		const userData = await res.json();
 		persistCredentials(userData);
 		setProgress(100);
-		setTimeout(() => navigate("/all"), 1500);
+		setTimeout(() => {
+			navigate("/all");
+		}, 1500);
+		return;
 	};
 
 	const unsuccessful = async (res) => {
