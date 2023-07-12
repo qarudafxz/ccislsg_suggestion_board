@@ -21,6 +21,25 @@ function Login() {
 	const emailInputRef = useRef();
 	const passwordInputRef = useRef();
 
+	const successful = async (res) => {
+		setProgress(80);
+		const userData = await res.json();
+		persistCredentials(userData);
+		setProgress(100);
+		setTimeout(() => navigate("/all"), 1500);
+	};
+
+	const unsuccessful = async (res) => {
+		setProgress(80);
+		const data = await res.json();
+		if (data?.type === "password") {
+			setProgress(100);
+			setIncorrectPassword(data?.message);
+			return;
+		}
+		setIncorrectEmail(data?.message);
+		setProgress(100);
+	};
 	const handleLogin = async (e) => {
 		e.preventDefault();
 		const email = emailInputRef?.current?.value;
@@ -33,30 +52,20 @@ function Login() {
 		}
 
 		try {
-			authLogin(email, password).then(async (res) => {
+			authLogin(email, password).then((res) => {
 				switch (res.status) {
 					case 200:
-						setProgress(100);
-						const userData = await res.json();
-						persistCredentials(userData);
-						setTimeout(() => navigate("/all"), 2000);
+						setProgress(50);
+						successful(res);
 						break;
 
 					case 400:
-						const data = await res.json();
-						if (data?.type === "password") {
-							setIncorrectPassword(data?.message);
-							return;
-						}
-
-						setIncorrectEmail(data?.message);
+						unsuccessful(res);
 						break;
 				}
 			});
 		} catch (err) {
 			console.log(err);
-		} finally {
-			setProgress(100);
 		}
 	};
 
@@ -87,7 +96,11 @@ function Login() {
 				setMessage("");
 			}, 3000);
 		}
-	}, [incorrectPassword, incorrectEmail, message]);
+
+		if (TOKEN) {
+			navigate("/all");
+		}
+	}, [incorrectPassword, incorrectEmail, message, TOKEN]);
 
 	return (
 		<div className='font-main'>
