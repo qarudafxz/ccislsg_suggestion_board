@@ -9,6 +9,8 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 
 import AllSuggestions from "./pages/suggestions/AllSuggestions";
+import YourSuggestions from "./pages/suggestions/YourSuggestions";
+import ReportBug from "./pages/suggestions/ReportBug";
 
 //components
 import SideNavbar from "./components/side-navbar/SideNavbar";
@@ -42,6 +44,14 @@ function App() {
 								<Route
 									path='/all'
 									element={<AllSuggestions />}
+								/>
+								<Route
+									path='/your-suggestions'
+									element={<YourSuggestions />}
+								/>
+								<Route
+									path='/report'
+									element={<ReportBug />}
 								/>
 							</Routes>
 						</div>
