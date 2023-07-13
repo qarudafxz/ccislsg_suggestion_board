@@ -26,6 +26,14 @@ const messages = [
 export const register = async (req, res) => {
 	const { username, email, password } = req.body;
 	try {
+		const isEmailValid = email.includes("@carsu.edu.ph");
+
+		if (!isEmailValid) {
+			return res
+				.status(400)
+				.json({ message: "Invalid email address. Please use your carsu account" });
+		}
+
 		const user = await User.findOne({ email });
 
 		if (user) {
