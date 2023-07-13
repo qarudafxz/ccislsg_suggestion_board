@@ -30,7 +30,7 @@ function SideNavbar() {
 								animate={{ x: 0 }}
 								exit={{ x: -1000 }}
 								transition={{ duration: 0.3 }}
-								className='xxxxs:block pt-14 pl-10 pr-6 bg-[#ea580c] w-9/12 h-screen sm:hidden'>
+								className='xxxxs:block pt-14 pl-10 pr-6 bg-[#1B1B1B] w-9/12 h-screen sm:hidden'>
 								<div className='flex flex-col gap-10'>
 									<img
 										src={Logo}
@@ -80,7 +80,7 @@ function SideNavbar() {
 				</AnimatePresence>
 				{/* pc */}
 				<div className='xxxxs:hidden md:block'>
-					<div className='flex flex-col gap-8 pt-4 bg-[#ea580c] w-full h-screen'>
+					<div className='flex flex-col gap-8 pt-4 bg-[#1B1B1B] w-full h-screen'>
 						<img
 							src={Logo}
 							alt='CCISLSG Logo'
@@ -102,7 +102,7 @@ function SideNavbar() {
 											className={({ isActive }) =>
 												"flex gap-6 items-center px-4 py-4 " +
 												(isActive
-													? "bg-[#ffb95c] text-white font-semibold duration-300 pl-4 border-l-8 border-primary w-full"
+													? "bg-primary text-white font-semibold duration-300 pl-4 border-l-8 border-primary w-full"
 													: "text-white")
 											}>
 											<div className='flex gap-8 items-center pl-10'>
@@ -119,8 +119,13 @@ function SideNavbar() {
 							);
 						})}
 						<button
-							className='border border-white rounded-full px-4 py-2 hoverBtn text-white w-9/12 mx-auto'
+							className='flex gap-4 place-content-center border border-white rounded-full px-4 py-2 hoverBtn text-white w-9/12 mx-auto hover:font-bold'
 							onClick={LOGOUT.fun}>
+							<motion.div
+								whileHover={{ x: -10 }}
+								transition={{ duration: 0.3 }}>
+								{LOGOUT.icon}
+							</motion.div>
 							{LOGOUT.title}
 						</button>
 					</div>

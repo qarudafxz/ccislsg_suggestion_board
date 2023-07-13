@@ -170,9 +170,9 @@ function Signup() {
 						className='w-full bg-primary py-2 text-center text-white font-semibold rounded-md mt-4'>
 						Sign Up
 					</button>
-					<p className='mt-4 text-zinc-400 md:flex place-content-center'>
+					<p className='mt-4 text-zinc-400 xxxxs:text-base md:flex place-content-center'>
 						Already have an account?{" "}
-						<span className='underline text-primary'>
+						<span className='underline text-primary ml-2'>
 							<Link to='/login'>Log In</Link>
 						</span>
 					</p>

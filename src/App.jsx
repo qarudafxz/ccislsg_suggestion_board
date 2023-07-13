@@ -38,7 +38,7 @@ function App() {
 				<Route
 					path='/*'
 					element={
-						<div className='font-main md:flex flex-row'>
+						<div className='font-main md:flex flex-row gap-4'>
 							<SideNavbar />
 							<Routes>
 								<Route

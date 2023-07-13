@@ -41,6 +41,12 @@ export const sideMenu = [
 
 export const logoutMenu = {
 	title: "Logout",
+	icon: (
+		<RiLogoutCircleFill
+			size={25}
+			className='text-white hoverBtn'
+		/>
+	),
 	fun: () => {
 		localStorage.removeItem("token");
 		localStorage.removeItem("user");
