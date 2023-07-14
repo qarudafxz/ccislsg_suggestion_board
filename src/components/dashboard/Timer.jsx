@@ -1,44 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { Component } from "react";
 
-function Timer() {
-	const timer = sessionStorage.getItem("timer");
-	const [timeLeft, setTimeLeft] = useState(timer);
+class Timer extends Component {
+	constructor(props) {
+		super(props);
 
-	useEffect(() => {
-		if (timer) {
-			const interval = setInterval(() => {
-				setTimeLeft((prevTime) => {
-					if (prevTime === "00:00:00") {
-						clearInterval(interval);
-						return prevTime;
-					}
+		this.state = { date: new Date() };
+	}
 
-					const [hours, minutes, seconds] = prevTime.split(":").map(Number);
+	componentDidMount() {
+		this.timerID = setInterval(() => this.tick(), 1000);
+	}
 
-					if (seconds > 0) {
-						return formatTime(hours, minutes, seconds - 1);
-					} else if (minutes > 0) {
-						return formatTime(hours, minutes - 1, 59);
-					} else if (hours > 0) {
-						return formatTime(hours - 1, 59, 59);
-					} else {
-						return "00:00:00";
-					}
-				});
-			}, 1000);
+	componentWillUnmount() {
+		clearInterval(this.timerID);
+	}
 
-			return () => clearInterval(interval);
-		}
-	}, [timer]);
+	tick() {
+		this.setState({
+			date: new Date(),
+		});
+	}
 
-	const formatTime = (hours, minutes, seconds) => {
-		const formattedHours = String(hours).padStart(2, "0");
-		const formattedMinutes = String(minutes).padStart(2, "0");
-		const formattedSeconds = String(seconds).padStart(2, "0");
-		return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
-	};
-
-	return <div>{timeLeft}</div>;
+	render() {
+		return (
+			<div>
+				<h2>{this.state.date.toLocaleTimeString()}</h2>
+			</div>
+		);
+	}
 }
 
 export default Timer;
