@@ -4,6 +4,7 @@ export const isAuthenticated = async (req, res, next) => {
 	const authHeader = req.headers["authorization"];
 
 	if (!authHeader) {
+		console.log("Authorization header is missing");
 		return res.status(403).json({ message: "Authorization header is missing" });
 	}
 

@@ -44,7 +44,10 @@ export const addSuggestion = async (req, res) => {
 		if (!user.canSuggest) {
 			return res
 				.status(400)
-				.json({ message: "You can only suggest once a day. Comeback tomorrow!" });
+				.json({
+					user,
+					message: "You can only suggest once a day. Comeback tomorrow!",
+				});
 
 			//if the user has not been able to suggest today, the user will be able to suggest again after 24 hours
 		} else {
@@ -59,8 +62,9 @@ export const addSuggestion = async (req, res) => {
 			await newSuggestion.save();
 			await user.save();
 
-			return res.status(201).json({
+			return res.status(200).json({
 				newSuggestion,
+				user,
 				timer: timer.toLocaleTimeString("en-US", {
 					hour12: false,
 					hour: "numeric",

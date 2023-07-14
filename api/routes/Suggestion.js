@@ -13,8 +13,8 @@ import { isAuthenticated } from "../middlewares/isAuth.js";
 const router = express.Router();
 
 //isAuth function must be added later if the frontend is already setted up
-router.post("/suggest/:id", addSuggestion);
-router.put("/edit-suggest/:id", editSuggestion);
-router.get("/top-suggestions", getTopSuggestions);
+router.post("/suggest/:id", isAuthenticated, addSuggestion);
+router.put("/edit-suggest/:id", isAuthenticated, editSuggestion);
+router.get("/top-suggestions", isAuthenticated, getTopSuggestions);
 
 export { router as SuggestionRoute };
