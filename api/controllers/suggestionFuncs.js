@@ -109,3 +109,26 @@ export const editSuggestion = async (req, res) => {
 };
 
 //delete suggestion
+export const deleteSuggestion = async (req, res) => {};
+
+//get top suggestions
+export const getTopSuggestions = async (req, res) => {
+	try {
+		const suggestions = await Sug.find();
+
+		if (!suggestions) {
+			return res.status(400).json({ message: "No suggestions found" });
+		}
+
+		const topSuggestions = suggestions
+			.sort((a, b) => b.upVotes - a.upVotes)
+			.slice(0, 5);
+
+		return res
+			.status(200)
+			.json({ topSuggestions, message: "Top 5 Suggestions found" });
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json({ message: "Server Error" });
+	}
+};

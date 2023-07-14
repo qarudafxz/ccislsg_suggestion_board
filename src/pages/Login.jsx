@@ -73,8 +73,14 @@ function Login() {
 	};
 
 	const persistCredentials = (data) => {
-		localStorage.setItem("token", data?.token);
-		localStorage.setItem("user", data?.user?.username);
+		const { token, user, email } = data;
+		const userData = {
+			token,
+			user,
+			email,
+		};
+
+		localStorage.setItem("userData", JSON.stringify(userData));
 	};
 
 	useEffect(() => {

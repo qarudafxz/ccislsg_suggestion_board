@@ -48,9 +48,8 @@ export const logoutMenu = {
 		/>
 	),
 	fun: () => {
-		localStorage.removeItem("token");
-		localStorage.removeItem("user");
+		localStorage.removeItem("userData");
 
-		setTimeout(() => window.location.reload(), 2000);
+		setTimeout(() => (window.location.href = "/"), 2000);
 	},
 };

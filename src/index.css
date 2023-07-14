@@ -43,3 +43,16 @@
  color: #FF7800;
  transition: 0.5s;
 }
+
+@keyframes fade-in {
+ 0% {
+   opacity: 0;
+ }
+ 100% {
+   opacity: 1;
+ }
+}
+
+.fade-in {
+ animation: fade-in 3s ease-in;
+}

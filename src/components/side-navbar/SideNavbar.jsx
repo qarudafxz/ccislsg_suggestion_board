@@ -19,7 +19,7 @@ function SideNavbar() {
 			<div>
 				<BiMenu
 					size={40}
-					className='xxxxs:block absolute -z-10 m-4 md:hidden'
+					className='xxxxs:block absolute z-10 m-4 md:hidden'
 					onClick={() => setIsClicked(!isClicked)}
 				/>
 				<AnimatePresence>

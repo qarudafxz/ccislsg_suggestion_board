@@ -2,6 +2,10 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getToken } from "../../helpers/getToken.js";
 
+//components
+
+import Creds from "../../components/dashboard/Creds.jsx";
+
 function AllSuggestions() {
 	const navigate = useNavigate();
 	useEffect(() => {
@@ -10,7 +14,11 @@ function AllSuggestions() {
 		}
 	}, []);
 
-	return <div>AllSuggestions</div>;
+	return (
+		<div>
+			<Creds />
+		</div>
+	);
 }
 
 export default AllSuggestions;
