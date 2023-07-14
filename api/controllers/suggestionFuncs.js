@@ -42,19 +42,13 @@ export const addSuggestion = async (req, res) => {
 		suggestionToday ? (user.canSuggest = false) : (user.canSuggest = true);
 
 		if (!user.canSuggest) {
-			return res
-				.status(400)
-				.json({
-					user,
-					message: "You can only suggest once a day. Comeback tomorrow!",
-				});
+			return res.status(400).json({
+				user,
+				message: "You can only suggest once a day. Comeback tomorrow!",
+			});
 
 			//if the user has not been able to suggest today, the user will be able to suggest again after 24 hours
 		} else {
-			//initialize 24 hours timer with a format of hh:mm:ss
-			const timer = new Date();
-			timer.setHours(24, 0, 0, 0);
-
 			user.numberOfSuggestions += 1;
 
 			const newSuggestion = new Sug({ creatorID: user._id, subject, suggestion });
@@ -65,12 +59,6 @@ export const addSuggestion = async (req, res) => {
 			return res.status(200).json({
 				newSuggestion,
 				user,
-				timer: timer.toLocaleTimeString("en-US", {
-					hour12: false,
-					hour: "numeric",
-					minute: "numeric",
-					second: "numeric",
-				}),
 				message: "Suggestion added successfully",
 			});
 		}

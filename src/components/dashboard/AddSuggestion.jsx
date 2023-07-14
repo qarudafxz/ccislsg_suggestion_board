@@ -1,5 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import TopLoadingBar from "react-top-loading-bar";
 import { ToastContainer, toast } from "react-toastify";
@@ -12,13 +11,9 @@ import { AiFillCloseCircle } from "react-icons/ai";
 const maximumText = 255;
 
 function AddSuggestion({ ...props }) {
-	const navigate = useNavigate();
 	const [subject, setSubject] = useState("");
 	const suggestionRef = useRef();
 	const [progress, setProgress] = useState(0);
-	const [timer, setTimer] = useState(
-		sessionStorage.getItem("timer") || "00:00:00"
-	);
 	const [textCount, setTextCounter] = useState(maximumText);
 
 	const checkMaximumText = () => {
@@ -39,23 +34,28 @@ function AddSuggestion({ ...props }) {
 			progress: undefined,
 			theme: "light",
 		});
-		setTimer(data.timer);
-
-		sessionStorage.setItem("timer", data.timer);
-
+		localStorage.setItem("date", data?.newSuggestion?.createdAt);
+		props.setIsAdd(!props.isAdd);
 		setProgress(100);
-
-		setTimeout(() => {
-			navigate("/your-suggestions", { state: { timer: data.timer } });
-		}, 1500);
-
 		return;
 	};
 
 	const unsuccessful = async (res) => {
 		setProgress(80);
 		const data = await res.json();
-		toast.error(data.message, {
+
+		const storedDate = localStorage.getItem("date");
+		const newSuggestionDate = new Date(storedDate);
+		newSuggestionDate.setDate(newSuggestionDate.getDate() + 1);
+
+		const formattedDate = newSuggestionDate.toLocaleString("en-US", {
+			hour: "numeric",
+			minute: "numeric",
+			second: "numeric",
+			hour12: true,
+		});
+
+		const toastOptions = {
 			position: "top-center",
 			autoClose: 2000,
 			hideProgressBar: false,
@@ -64,10 +64,16 @@ function AddSuggestion({ ...props }) {
 			draggable: true,
 			progress: undefined,
 			theme: "light",
-		});
+		};
+
+		toast.error(
+			`${data.message}. You can re-suggest on ${formattedDate}`,
+			toastOptions
+		);
+
 		setProgress(100);
-		return;
 	};
+
 	const submitSuggest = async (e) => {
 		e.preventDefault();
 		setProgress(30);
