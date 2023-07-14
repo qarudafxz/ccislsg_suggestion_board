@@ -7,3 +7,10 @@ export const getUsernameAndEmail = () => {
 		email: userData?.user?.email,
 	};
 };
+
+export const getUserID = () => {
+	const userData = JSON.parse(localStorage.getItem("userData"));
+	if (!userData?.token) return null;
+
+	return userData?.user?._id;
+};

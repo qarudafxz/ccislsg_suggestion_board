@@ -30,28 +30,35 @@ function SideNavbar() {
 								animate={{ x: 0 }}
 								exit={{ x: -1000 }}
 								transition={{ duration: 0.3 }}
-								className='xxxxs:block pt-14 pl-10 pr-6 bg-[#1B1B1B] w-9/12 h-screen sm:hidden'>
+								className='xxxxs:block pt-14 bg-[#1B1B1B] h-screen sm:hidden'>
 								<div className='flex flex-col gap-10'>
 									<img
 										src={Logo}
 										alt='CCISLSG Logo'
-										className='xxxs:w-20 h-auto'
+										className='xxxs:w-20 h-auto ml-8'
 									/>
 									{MENU?.map((item, idx) => {
 										return (
 											<div
 												key={idx}
 												className='flex gap-4 items-center'>
-												<motion.div
-													whileHover={{ x: -10 }}
-													transition={{ duration: 0.3 }}>
-													{item?.icon}
-												</motion.div>
 												<NavLink
 													key={idx}
 													to={item?.path}
-													className='text-white font-semibold'>
-													{item?.title}
+													className={({ isActive }) =>
+														"text-xs flex gap-6 items-center px-4 py-4 " +
+														(isActive
+															? "bg-primary text-white font-semibold duration-300 pl-4 border-l-8 border-primary w-full"
+															: "text-white")
+													}>
+													<div className='flex gap-8 items-center pl-10'>
+														<motion.div
+															whileHover={{ x: -10 }}
+															transition={{ duration: 0.3 }}>
+															{item?.icon}
+														</motion.div>
+														{item?.title}
+													</div>
 												</NavLink>
 											</div>
 										);
@@ -80,7 +87,7 @@ function SideNavbar() {
 				</AnimatePresence>
 				{/* pc */}
 				<div className='xxxxs:hidden md:block'>
-					<div className='flex flex-col gap-8 pt-4 bg-[#1B1B1B] w-full h-screen'>
+					<div className='flex flex-col gap-8 pt-4 bg-[#1B1B1B] w-80 h-screen'>
 						<img
 							src={Logo}
 							alt='CCISLSG Logo'

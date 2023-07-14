@@ -23,7 +23,7 @@ function Creds() {
 
 	return (
 		<div>
-			<div className='flex flex-col bg-zinc-200 rounded-md px-4 py-2'>
+			<div className='flex flex-col bg-zinc-200 rounded-md px-4 py-2 md:absolute top-24 right-6'>
 				<h1>{data.myUsername}</h1>
 				<h1 className='font-bold'>{data.myEmail}</h1>
 			</div>
