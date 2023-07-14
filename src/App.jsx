@@ -80,7 +80,7 @@ function App() {
 }
 
 function preLoaderAsyncCall() {
-	return new Promise((resolve) => setTimeout(resolve, 3000));
+	return new Promise((resolve) => setTimeout(resolve, 4000));
 }
 
 export default App;
