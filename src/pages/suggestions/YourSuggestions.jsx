@@ -13,9 +13,11 @@ function YourSuggestions() {
 	}, []);
 
 	return (
-		<div className='xxxxs:flex flex-col p-4 relative top-12 md:flex-row justify-between'>
-			<button>Add Suggestion</button>
+		<div>
 			<Creds />
+			<div className=''>
+				<button>Add Suggestion</button>
+			</div>
 		</div>
 	);
 }
