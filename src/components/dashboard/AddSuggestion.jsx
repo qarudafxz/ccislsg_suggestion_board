@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import TopLoadingBar from "react-top-loading-bar";
 import { ToastContainer, toast } from "react-toastify";
@@ -6,15 +6,28 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { addSuggestion } from "../../utils/fetchers/AddSuggestion.js";
 
+import { buildUrl } from "../../utils/buildUrl.js";
+
 import { AiFillCloseCircle } from "react-icons/ai";
 
 const maximumText = 255;
 
 function AddSuggestion({ ...props }) {
+	const userID = props.userID;
 	const [subject, setSubject] = useState("");
 	const suggestionRef = useRef();
 	const [progress, setProgress] = useState(0);
 	const [textCount, setTextCounter] = useState(maximumText);
+
+	const [sugDate, setSugDate] = useState(new Date());
+
+	const getLatestSug = async () => {
+		const url = buildUrl(`/sug/get-latest-sug/?userID=${userID}`);
+		const response = await fetch(url);
+		const data = await response.json();
+
+		setSugDate(data?.latestSug?.createdAt);
+	};
 
 	const checkMaximumText = () => {
 		const currentTextCount = maximumText - suggestionRef.current.value.length;
@@ -44,17 +57,6 @@ function AddSuggestion({ ...props }) {
 		setProgress(80);
 		const data = await res.json();
 
-		const storedDate = localStorage.getItem("date");
-		const newSuggestionDate = new Date(storedDate);
-		newSuggestionDate.setDate(newSuggestionDate.getDate() + 1);
-
-		const formattedDate = newSuggestionDate.toLocaleString("en-US", {
-			hour: "numeric",
-			minute: "numeric",
-			second: "numeric",
-			hour12: true,
-		});
-
 		const toastOptions = {
 			position: "top-center",
 			autoClose: 2000,
@@ -66,11 +68,23 @@ function AddSuggestion({ ...props }) {
 			theme: "light",
 		};
 
+		const currentDate = new Date(sugDate);
+		currentDate.setDate(currentDate.getDate() + 1);
+
 		toast.error(
-			`${data.message}. You can re-suggest on ${formattedDate}`,
+			`${data.message}. You can re-suggest on ${currentDate.toLocaleDateString(
+				"en-US",
+				{
+					hour: "numeric",
+					minute: "numeric",
+					second: "numeric",
+					month: "long",
+					day: "numeric",
+					year: "numeric",
+				}
+			)}`,
 			toastOptions
 		);
-
 		setProgress(100);
 	};
 
@@ -127,6 +141,10 @@ function AddSuggestion({ ...props }) {
 			console.log(err);
 		}
 	};
+
+	useEffect(() => {
+		getLatestSug();
+	}, []);
 
 	return (
 		<div>

@@ -8,6 +8,7 @@ import Creds from "../../components/dashboard/Creds.jsx";
 
 import AddSuggestion from "../../components/dashboard/AddSuggestion.jsx";
 import Timer from "../../components/dashboard/Timer.jsx";
+import LatestSug from "../../components/dashboard/LatestSug.jsx";
 
 function YourSuggestions() {
 	const monthNow = new Date().toLocaleString("en-US", { month: "long" });
@@ -26,20 +27,8 @@ function YourSuggestions() {
 	return (
 		<div>
 			<Creds />
+			<LatestSug />
 			<div className='bg-red-500'>
-				<h1>{`Last Suggestion Created: ${new Date(date).toLocaleDateString(
-					"en-US",
-					{
-						hour: "numeric",
-						minute: "numeric",
-						second: "numeric",
-						hour12: true,
-						month: "long",
-						day: "numeric",
-						year: "numeric",
-					}
-				)}`}</h1>
-
 				<h1>{`New Suggestion will be on ${monthNow} ${
 					new Date().getDate() + 1
 				}, ${yearNow}`}</h1>

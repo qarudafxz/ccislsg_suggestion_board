@@ -124,3 +124,33 @@ export const getTopSuggestions = async (req, res) => {
 		return res.status(500).json({ message: "Server Error" });
 	}
 };
+
+//get latest suggestion from user
+export const getLatestSug = async (req, res) => {
+	const { userID } = req.query;
+
+	console.log(userID);
+
+	try {
+		const user = await User.findOne({ _id: userID });
+
+		if (!user) {
+			return res.status(400).json({ message: "User does not exist" });
+		}
+
+		const latestSug = await Sug.findOne({ creatorID: userID }).sort({
+			createdAt: -1,
+		});
+
+		if (!latestSug) {
+			return res.status(400).json({ message: "No suggestions found" });
+		}
+
+		return res
+			.status(200)
+			.json({ latestSug, message: "Latest suggestion found" });
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json({ message: "Server Error" });
+	}
+};
