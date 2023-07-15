@@ -47,8 +47,8 @@ function AddSuggestion({ ...props }) {
 			progress: undefined,
 			theme: "light",
 		});
-		localStorage.setItem("date", data?.newSuggestion?.createdAt);
 		props.setIsAdd(!props.isAdd);
+		window.location.reload();
 		setProgress(100);
 		return;
 	};
@@ -56,7 +56,7 @@ function AddSuggestion({ ...props }) {
 	const unsuccessful = async (res) => {
 		setProgress(80);
 		const data = await res.json();
-
+		s;
 		const toastOptions = {
 			position: "top-center",
 			autoClose: 2000,
