@@ -17,6 +17,6 @@ const router = express.Router();
 router.post("/suggest/:id", isAuthenticated, addSuggestion);
 router.put("/edit-suggest/:id", isAuthenticated, editSuggestion);
 router.get("/top-suggestions", isAuthenticated, getTopSuggestions);
-router.get("/get-latest-sug/", getLatestSug);
+router.get("/get-latest-sug/", isAuthenticated, getLatestSug);
 
 export { router as SuggestionRoute };

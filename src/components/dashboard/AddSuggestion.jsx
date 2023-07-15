@@ -9,10 +9,12 @@ import { addSuggestion } from "../../utils/fetchers/AddSuggestion.js";
 import { buildUrl } from "../../utils/buildUrl.js";
 
 import { AiFillCloseCircle } from "react-icons/ai";
+import { getToken } from "../../helpers/getToken.js";
 
 const maximumText = 255;
 
 function AddSuggestion({ ...props }) {
+	const TOKEN = getToken();
 	const userID = props.userID;
 	const [subject, setSubject] = useState("");
 	const suggestionRef = useRef();
@@ -23,7 +25,13 @@ function AddSuggestion({ ...props }) {
 
 	const getLatestSug = async () => {
 		const url = buildUrl(`/sug/get-latest-sug/?userID=${userID}`);
-		const response = await fetch(url);
+		const response = await fetch(url, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${TOKEN}`,
+			},
+		});
 		const data = await response.json();
 
 		setSugDate(data?.latestSug?.createdAt);
@@ -56,7 +64,6 @@ function AddSuggestion({ ...props }) {
 	const unsuccessful = async (res) => {
 		setProgress(80);
 		const data = await res.json();
-		s;
 		const toastOptions = {
 			position: "top-center",
 			autoClose: 2000,
@@ -72,19 +79,22 @@ function AddSuggestion({ ...props }) {
 		currentDate.setDate(currentDate.getDate() + 1);
 
 		toast.error(
-			`${data.message}. You can re-suggest on ${currentDate.toLocaleDateString(
-				"en-US",
-				{
-					hour: "numeric",
-					minute: "numeric",
-					second: "numeric",
-					month: "long",
-					day: "numeric",
-					year: "numeric",
-				}
-			)}`,
+			`${
+				data.message.includes("Please do not use swear words")
+					? data.message
+					: "You can only suggest 1 every 24 hours. You can re-suggest on " +
+					  currentDate.toLocaleDateString("en-US", {
+							hour: "numeric",
+							minute: "numeric",
+							second: "numeric",
+							month: "long",
+							day: "numeric",
+							year: "numeric",
+					  })
+			}`,
 			toastOptions
 		);
+
 		setProgress(100);
 	};
 

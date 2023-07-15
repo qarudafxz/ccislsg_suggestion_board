@@ -98,4 +98,10 @@ export const filter = [
 	"boysit",
 	"bwesit",
 	"boyshit",
+	"shet",
+	"bisakol",
+	"putapete",
+	"pepe",
+	"pipi",
+	"potapepe",
 ];
