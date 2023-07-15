@@ -13,7 +13,6 @@ import LatestSug from "../../components/dashboard/LatestSug.jsx";
 function YourSuggestions() {
 	const monthNow = new Date().toLocaleString("en-US", { month: "long" });
 	const yearNow = new Date().getFullYear();
-	const date = localStorage.getItem("date");
 	const userID = getUserID();
 	const [isAdd, setIsAdd] = useState(false);
 	const navigate = useNavigate();
