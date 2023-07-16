@@ -48,7 +48,7 @@ export const logoutMenu = {
 		/>
 	),
 	fun: () => {
-		localStorage.removeItem("userData");
+		sessionStorage.removeItem("userData");
 
 		setTimeout(() => (window.location.href = "/"), 2000);
 	},
