@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 //assets
@@ -15,6 +15,10 @@ import { IoMegaphoneSharp } from "react-icons/io5";
 import { motion } from "framer-motion";
 
 function Home() {
+	useEffect(() => {
+		document.title = "CCISLSG Suggestion Board";
+	}, []);
+
 	return (
 		<div
 			className='font-main overflow-y-hidden'
