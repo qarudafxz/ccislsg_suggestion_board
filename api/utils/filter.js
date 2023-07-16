@@ -104,4 +104,5 @@ export const filter = [
 	"pepe",
 	"pipi",
 	"potapepe",
+	"fifi",
 ];

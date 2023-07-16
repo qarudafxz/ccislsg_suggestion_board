@@ -10,6 +10,9 @@ import AddSuggestion from "../../components/dashboard/AddSuggestion.jsx";
 import Timer from "../../components/dashboard/Timer.jsx";
 import LatestSug from "../../components/dashboard/LatestSug.jsx";
 
+// your suggestions component
+import YourSuggestionsGrid from "../../components/dashboard/suggestions/YourSuggestionsGrid.jsx";
+
 function YourSuggestions() {
 	const monthNow = new Date().toLocaleString("en-US", { month: "long" });
 	const yearNow = new Date().getFullYear();
@@ -58,6 +61,10 @@ function YourSuggestions() {
 					userID={userID}
 				/>
 			)}
+			{/* suggestions */}
+			<div className='w-full mt-24'>
+				<YourSuggestionsGrid />
+			</div>
 		</div>
 	);
 }

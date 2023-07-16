@@ -12,6 +12,7 @@ function AllSuggestions() {
 		if (!getToken()) {
 			return navigate("/login", { error: "Please login first to continue" });
 		}
+		document.title = "All Suggestions | CCISLSG Suggestion Board";
 	}, []);
 
 	return (

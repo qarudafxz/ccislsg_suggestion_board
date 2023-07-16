@@ -55,20 +55,22 @@ function App() {
 							<Head />
 							<div className='font-main md:flex flex-row gap-4'>
 								<SideNavbar />
-								<Routes>
-									<Route
-										path='/all'
-										element={<AllSuggestions />}
-									/>
-									<Route
-										path='/your-suggestions'
-										element={<YourSuggestions />}
-									/>
-									<Route
-										path='/report'
-										element={<ReportBug />}
-									/>
-								</Routes>
+								<div className='xxxs:px-6 xxxs:px-8 xs:px-10 md:px-16'>
+									<Routes>
+										<Route
+											path='/all'
+											element={<AllSuggestions />}
+										/>
+										<Route
+											path='/your-suggestions'
+											element={<YourSuggestions />}
+										/>
+										<Route
+											path='/report'
+											element={<ReportBug />}
+										/>
+									</Routes>
+								</div>
 							</div>
 						</div>
 					}

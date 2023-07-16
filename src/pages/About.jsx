@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 //components
 import Head from "../components/Head";
@@ -12,6 +12,9 @@ import Partners from "../components/for-about/Partners";
 import Bg from "../assets/bg.svg";
 
 function About() {
+	useEffect(() => {
+		document.title = "About | CCISLSG Suggestion Board";
+	}, []);
 	return (
 		<div
 			className='font-main'

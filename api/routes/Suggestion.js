@@ -6,6 +6,7 @@ import {
 	editSuggestion,
 	getTopSuggestions,
 	getLatestSug,
+	getYourSuggestions,
 } from "../controllers/suggestionFuncs.js";
 
 //middlewares
@@ -18,5 +19,6 @@ router.post("/suggest/:id", isAuthenticated, addSuggestion);
 router.put("/edit-suggest/:id", isAuthenticated, editSuggestion);
 router.get("/top-suggestions", isAuthenticated, getTopSuggestions);
 router.get("/get-latest-sug/", isAuthenticated, getLatestSug);
+router.get("/your-suggestions", getYourSuggestions);
 
 export { router as SuggestionRoute };

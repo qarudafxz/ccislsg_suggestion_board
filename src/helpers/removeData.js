@@ -1,3 +1,3 @@
 export const removeData = () => {
-	localStorage.removeItem("userData");
+	sessionStorage.removeItem("userData");
 };

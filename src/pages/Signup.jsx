@@ -106,6 +106,7 @@ function Signup() {
 
 	useEffect(() => {
 		usernameRef.current.focus();
+		document.title = "Signup | CCISLSG Suggestion Board";
 	}, []);
 
 	return (

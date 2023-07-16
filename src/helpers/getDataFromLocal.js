@@ -1,5 +1,5 @@
 export const getUsernameAndEmail = () => {
-	const userData = JSON.parse(localStorage.getItem("userData"));
+	const userData = JSON.parse(sessionStorage.getItem("userData"));
 	if (!userData?.token) return null;
 
 	return {
@@ -9,7 +9,7 @@ export const getUsernameAndEmail = () => {
 };
 
 export const getUserID = () => {
-	const userData = JSON.parse(localStorage.getItem("userData"));
+	const userData = JSON.parse(sessionStorage.getItem("userData"));
 	if (!userData?.token) return null;
 
 	return userData?.user?._id;

@@ -80,7 +80,7 @@ function Login() {
 			email,
 		};
 
-		localStorage.setItem("userData", JSON.stringify(userData));
+		sessionStorage.setItem("userData", JSON.stringify(userData));
 	};
 
 	useEffect(() => {
@@ -111,6 +111,9 @@ function Login() {
 		}
 	}, [incorrectPassword, incorrectEmail, message, TOKEN]);
 
+	useEffect(() => {
+		document.title = "Login | CCISLSG Suggestion Board";
+	}, []);
 	return (
 		<div className='font-main'>
 			<TopLoadingBar

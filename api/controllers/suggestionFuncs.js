@@ -154,3 +154,26 @@ export const getLatestSug = async (req, res) => {
 		return res.status(500).json({ message: "Server Error" });
 	}
 };
+
+//get your suggestions
+export const getYourSuggestions = async (req, res) => {
+	const { userID } = req.query;
+	try {
+		const user = await User.findOne({ _id: userID });
+
+		if (!user) {
+			return res.status(400).json({ message: "User does not exist" });
+		}
+
+		const yourSuggestions = await Sug.find({ creatorID: userID });
+
+		if (!yourSuggestions) {
+			return res.status(400).json({ message: "No suggestions found" });
+		}
+
+		return res.status(200).json({ user, yourSuggestions });
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json({ message: "Server Error" });
+	}
+};
