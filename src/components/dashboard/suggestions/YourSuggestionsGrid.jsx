@@ -51,6 +51,7 @@ function YourSuggestions() {
 				data?.yourSuggestions?.map((suggestion) => {
 					return (
 						<div
+							key={suggestion?._id}
 							className='border border-zinc-300 rounded-md shadow-md xxxxs:p-2 md:p-4'
 							style={{ minHeight: "150px", maxHeight: "600px" }}>
 							<div className='flex gap-4 items-center mb-2'>

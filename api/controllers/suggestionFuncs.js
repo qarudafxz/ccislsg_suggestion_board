@@ -1,5 +1,6 @@
 import { Sug } from "../models/Sug.js";
 import { User } from "../models/User.js";
+import { Comments } from "../models/Comments.js";
 import { filterWords } from "../helpers/filterWords.js";
 
 export const addSuggestion = async (req, res) => {
@@ -172,6 +173,38 @@ export const getYourSuggestions = async (req, res) => {
 		}
 
 		return res.status(200).json({ user, yourSuggestions });
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json({ message: "Server Error" });
+	}
+};
+
+//add comment to a specific suggestion
+
+export const addComment = async (req, res) => {
+	const { creatorID, sugID } = req.params;
+	const { comment } = req.body;
+
+	try {
+		const user = await User.findOne({ _id: creatorID });
+
+		if (!user) {
+			return res.status(400).json({ message: "User does not exist" });
+		}
+
+		const sug = await Sug.findOne({ _id: sugID });
+
+		if (!sug) {
+			return res.status(400).json({ message: "Suggestion does not exist" });
+		}
+
+		const commentToLower = comment.toLowerCase();
+
+		if (filterWords(commentToLower)) {
+			return res.status(400).json({ message: "Please do not use swear words" });
+		}
+
+		return res.status(200).json({ message: "Comment successfully added" });
 	} catch (err) {
 		console.log(err);
 		return res.status(500).json({ message: "Server Error" });
