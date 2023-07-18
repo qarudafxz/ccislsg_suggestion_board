@@ -46,14 +46,14 @@ function YourSuggestions() {
 	}, []);
 
 	return (
-		<div className='xxxs:flex flex-col gap-4 md:grid grid-cols-4 gap-4'>
+		<div className='w-full xxxs:flex flex-col gap-4 lg:grid grid-cols-3 xl:grid grid-cols-4 gap-4'>
 			{data?.yourSuggestions ? (
 				data?.yourSuggestions?.map((suggestion) => {
 					return (
 						<div
 							key={suggestion?._id}
 							className='border border-zinc-300 rounded-md shadow-md xxxxs:p-2 md:p-4'
-							style={{ minHeight: "150px", maxHeight: "600px" }}>
+							style={{ minHeight: "150px", maxHeight: "650px" }}>
 							<div className='flex gap-4 items-center mb-2'>
 								<BiSolidUserRectangle size={30} />
 								<h1 className='font-semibolf'>{data?.user?.username}</h1>
@@ -74,10 +74,14 @@ function YourSuggestions() {
 								</h1>
 							</div>
 							<div className='flex flex-col gap-2 mt-6'>
-								<h1 className='font-bold xxxs:text-xl md:text-2xl lg:text-3xl'>
+								<h1 className='font-bold mb-6 xxxs:text-xl md:text-2xl lg:text-3xl'>
 									Suggestion
 								</h1>
-								<p className='xxxxs:text-md md:text-lg lg:text-xl'>
+								<p
+									className='xxxxs:text-md md:text-sm xl:text-xl'
+									style={{
+										height: "250px",
+									}}>
 									{!isLoading ? (
 										suggestion?.suggestion
 									) : (
@@ -88,7 +92,7 @@ function YourSuggestions() {
 									)}
 								</p>
 							</div>
-							<div className='flex justify-between gap-20 border border-zinc-200 mt-4 rounded-md px-4 py-2'>
+							<div className='gap-20 border border-zinc-200 mt-4 rounded-md px-4 py-2 md:flex flex-col gap-4 lg:grid grid-cols-2 gap-24'>
 								<div className='flex flex-col gap-2 xxxs:text-sm lg:text-md'>
 									<h1>Date Suggested: </h1>
 									<h1>
