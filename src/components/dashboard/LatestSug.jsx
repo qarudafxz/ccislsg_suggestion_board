@@ -38,10 +38,11 @@ function LatestSug() {
 	}, [sugDate]);
 
 	return (
-		<div>
+		<div className='pt-10'>
 			<h1>
-				{`Last Suggestion Created at: ${
-					sugDate
+				Last Suggestion Created at:{" "}
+				<span className='font-bold'>
+					{sugDate
 						? new Date(sugDate).toLocaleDateString("en-US", {
 								hour: "numeric",
 								minute: "numeric",
@@ -50,29 +51,33 @@ function LatestSug() {
 								day: "numeric",
 								year: "numeric",
 						  })
-						: "Have not suggested yet"
-				}`}
+						: "Have not suggested yet"}
+				</span>
 			</h1>
-			<div className='bg-red-500'>
+			<div>
 				<h1>
 					New Suggestion input will be on{" "}
-					{new Date(dateTomorrow).toLocaleDateString("en-US", {
-						hour: "numeric",
-						minute: "numeric",
-						second: "numeric",
-						month: "long",
-						day: "numeric",
-						year: "numeric",
-					})}
-				</h1>
-				<div className='flex gap-2'>
-					<h1>
-						Date & Time Now:{" "}
-						{new Date().toLocaleDateString("en-US", {
+					<span className='font-bold'>
+						{new Date(dateTomorrow).toLocaleDateString("en-US", {
+							hour: "numeric",
+							minute: "numeric",
+							second: "numeric",
 							month: "long",
 							day: "numeric",
 							year: "numeric",
 						})}
+					</span>
+				</h1>
+				<div className='flex gap-2'>
+					<h1>
+						Date & Time Now:{" "}
+						<span className='font-bold'>
+							{new Date().toLocaleDateString("en-US", {
+								month: "long",
+								day: "numeric",
+								year: "numeric",
+							})}
+						</span>
 					</h1>
 					<Timer />
 				</div>

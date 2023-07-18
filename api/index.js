@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(
 	cors({
 		origin: "*",
-		methods: "POST",
+		methods: ["GET", "POST", "PUT", "DELETE"],
 		credentials: true,
 	})
 );

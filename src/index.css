@@ -56,3 +56,7 @@
 .fade-in {
  animation: fade-in 3s ease-in;
 }
+
+.textColor {
+  color: #FF7800;
+}

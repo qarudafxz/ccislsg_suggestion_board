@@ -5,9 +5,12 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { BiSolidUserRectangle } from "react-icons/bi";
 import { TbSquareRoundedArrowUpFilled } from "react-icons/tb";
 
-import { buildUrl } from "../../../utils/buildUrl.js";
 import { getUserID } from "../../../helpers/getDataFromLocal.js";
 import { getToken } from "../../../helpers/getToken.js";
+
+import { FaTrashCan } from "react-icons/fa6";
+
+import { getAllOfYourSuggestions } from "../../../utils/fetchers/GetAllSuggestions.js";
 
 function YourSuggestions() {
 	const TOKEN = getToken();
@@ -18,15 +21,7 @@ function YourSuggestions() {
 	const fetchAllOfYourSuggestions = async () => {
 		setIsLoading(true);
 		try {
-			await fetch(
-				buildUrl(`/sug/your-suggestions/?userID=${userID}`, {
-					method: "GET",
-					headers: {
-						Authorization: `Bearer ${TOKEN}`,
-						"Content-Type": "application/json",
-					},
-				})
-			)
+			getAllOfYourSuggestions(userID, TOKEN)
 				.then((res) => res.json())
 				.then((data) => {
 					setData(data);
@@ -34,6 +29,28 @@ function YourSuggestions() {
 					setTimeout(() => {
 						setIsLoading(false);
 					}, 1500);
+				});
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const deleteSuggestion = async (userID, sugID) => {
+		const URL = import.meta.env.DEV ? `http://localhost:3002/api` : `/api`;
+
+		console.log(URL + `/sug/delete-suggestion/${userID}/${sugID}`);
+		try {
+			await fetch(URL + `/sug/delete-suggestion/${userID}/${sugID}`, {
+				method: "DELETE",
+				headers: {
+					Authorization: `Bearer ${TOKEN}`,
+					"Content-Type": "application/json",
+				},
+			})
+				.then((res) => res.json())
+				.then((data) => {
+					console.log(data);
+					fetchAllOfYourSuggestions();
 				});
 		} catch (err) {
 			console.log(err);
@@ -54,9 +71,18 @@ function YourSuggestions() {
 							key={suggestion?._id}
 							className='border border-zinc-300 rounded-md shadow-md xxxxs:p-2 md:p-4'
 							style={{ minHeight: "150px", maxHeight: "650px" }}>
-							<div className='flex gap-4 items-center mb-2'>
-								<BiSolidUserRectangle size={30} />
-								<h1 className='font-semibolf'>{data?.user?.username}</h1>
+							<div className='flex justify-between mb-4'>
+								<div className='flex gap-4 items-center mb-2'>
+									<BiSolidUserRectangle size={30} />
+									<h1 className='font-semibolf'>{data?.user?.username}</h1>
+								</div>
+								<button onClick={() => deleteSuggestion(userID, suggestion?._id)}>
+									<FaTrashCan
+										size={40}
+										className='bg-white text-primary border border-[#FF7800] rounded-full p-2 cursor-pointer hover:bg-primary hover:text-white hover:
+										window.location.reload(); duration-200'
+									/>
+								</button>
 							</div>
 							<div className='flex gap-4 items-center bg-primary px-4 py-2 rounded-md text-white'>
 								<h1 className='font-bold xxxs:text-lg md:text-xl lg:text-2xl'>

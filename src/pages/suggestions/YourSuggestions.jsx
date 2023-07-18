@@ -27,14 +27,17 @@ function YourSuggestions() {
 		<div>
 			<Creds />
 			<LatestSug />
-			<div className=''>
+			<div className='mt-10 flex place-content-center lg:place-content-start'>
 				<button
+					className='bg-white border-2 border-[#FF7800] px-4 py-2 text-primary font-semibold rounded-full'
 					onClick={() => {
 						setIsAdd(!isAdd);
 					}}>
 					Add Suggestion
 				</button>
 			</div>
+			{/* this will be a card to display number of suggestions of the user */}
+			<div className='flex flex-col p-4 rounded-md bg-primary mt-4 xxxs:w-full lg:w-3/12'></div>
 			{isAdd && (
 				<AddSuggestion
 					isAdd={isAdd}

@@ -102,7 +102,35 @@ export const editSuggestion = async (req, res) => {
 };
 
 //delete suggestion
-export const deleteSuggestion = async (req, res) => {};
+export const deleteSuggestion = async (req, res) => {
+	const { userID, sugID } = req.params;
+
+	try {
+		const user = await User.findOne({ _id: userID });
+
+		if (!user) {
+			return res.status(400).json({ message: "User does not exist" });
+		}
+
+		const sug = await Sug.findOneAndDelete({ _id: sugID, creatorID: userID });
+
+		if (!sug) {
+			return res.status(400).json({ message: "Suggestion does not exist" });
+		}
+
+		user.numberOfSuggestions = user.numberOfSuggestions - 1;
+
+		await sug.save();
+		await user.save();
+
+		console.log(user.numberOfSuggestions);
+
+		return res.status(200).json({ message: "Suggestion deleted successfully" });
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json({ message: "Server Error" });
+	}
+};
 
 //get top suggestions
 export const getTopSuggestions = async (req, res) => {
