@@ -14,6 +14,7 @@ import { FaComments } from "react-icons/fa";
 function TopSuggestions() {
 	const TOKEN = getToken();
 	const [topSug, setTopSug] = useState([]);
+	const [username, setUsername] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 
 	const getTopSug = async () => {
@@ -29,6 +30,8 @@ function TopSuggestions() {
 				.then((res) => res.json())
 				.then((data) => {
 					setTopSug(data.topSuggestions);
+					setUsername(data.user.username);
+					console.log(data);
 					setTimeout(() => {
 						setIsLoading(false);
 					}, 1500);
@@ -44,17 +47,18 @@ function TopSuggestions() {
 	return (
 		<div className=''>
 			<h1 className='font-bold text-4xl mb-8 xxxxs:mt-10 md:mt-32'>
-				Top 5 Suggestions
+				Top 3 Suggestions
 			</h1>
-			<div className='xxxxs:flex flex-col gap-4 lg:grid grid-cols-5 gap-4'>
+			<div className='bg-primary p-4 rounded-md w-full xxxs:flex flex-col gap-10 xl:grid grid-cols-2 xxl:grid grid-cols-3'>
 				{topSug.length !== 0 ? (
 					topSug.map((suggestion) => (
 						<div
 							key={suggestion?._id}
-							className='border border-zinc-300 rounded-md shadow-md xxxxs:p-2 md:p-4'>
+							className='bg-white rounded-md shadow-md xxxxs:p-2 md:p-4'>
 							<div className='flex justify-between mb-4'>
 								<div className='flex gap-4 items-center mb-2'>
 									<BiSolidUserRectangle size={30} />
+									<h1>{username}</h1>
 								</div>
 								<Link to={`/suggestion/${suggestion?._id}`}>
 									<MdPageview
@@ -64,7 +68,7 @@ function TopSuggestions() {
 									/>
 								</Link>
 							</div>
-							<div className='flex gap-4 items-center bg-primary px-4 py-2 rounded-md text-white'>
+							<div className='flex gap-4 items-center bg-zinc-200 px-4 py-2 rounded-md '>
 								<h1 className='font-bold xxxs:text-lg md:text-xl lg:text-2xl'>
 									Subject:{" "}
 								</h1>
@@ -83,7 +87,7 @@ function TopSuggestions() {
 								<h1 className='font-bold mb-6 xxxs:text-xl md:text-2xl lg:text-3xl'>
 									Suggestion
 								</h1>
-								<p className='xxxxs:text-md md:text-sm xl:text-xl'>
+								<p className='xxxxs:text-md md:text-sm xl:text-md'>
 									{!isLoading ? (
 										suggestion?.suggestion
 									) : (

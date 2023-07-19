@@ -14,7 +14,8 @@ export default {
 				sm: "640px",
 				md: "768px",
 				lg: "1024px",
-				xl: "1280px",
+				xl: "1245px",
+				xxl: "1536px",
 			},
 			backgroundColor: {
 				primary: "#FF7800",

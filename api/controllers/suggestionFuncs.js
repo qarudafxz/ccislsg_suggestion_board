@@ -141,13 +141,17 @@ export const getTopSuggestions = async (req, res) => {
 			return res.status(400).json({ message: "No suggestions found" });
 		}
 
+		const user = await User.find({ _id: suggestions.creatorID });
+
 		const topSuggestions = suggestions
 			.sort((a, b) => b.upVotes - a.upVotes)
-			.slice(0, 5);
+			.slice(0, 3);
+
+		console.log(user);
 
 		return res
 			.status(200)
-			.json({ topSuggestions, message: "Top 5 Suggestions found" });
+			.json({ topSuggestions, user, message: "Top 3 Suggestions found" });
 	} catch (err) {
 		console.log(err);
 		return res.status(500).json({ message: "Server Error" });

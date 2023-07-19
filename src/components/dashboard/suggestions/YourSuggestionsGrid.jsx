@@ -63,13 +63,15 @@ function YourSuggestions() {
 	}, []);
 
 	return (
-		<div className='w-full xxxs:flex flex-col gap-4 lg:grid grid-cols-3 xl:grid grid-cols-4 gap-4'>
+		<div
+			className='w-full xxxs:flex flex-col gap-10 xl:grid grid-cols-2 xxl:grid grid-cols-3'
+			style={{ maxHeight: "650px" }}>
 			{data?.yourSuggestions ? (
 				data?.yourSuggestions?.map((suggestion) => {
 					return (
 						<div
 							key={suggestion?._id}
-							className='border border-zinc-300 rounded-md shadow-md xxxxs:p-2 md:p-4'
+							className='w-full border border-zinc-300 rounded-md shadow-md xxxxs:p-2 md:p-4'
 							style={{ minHeight: "150px", maxHeight: "650px" }}>
 							<div className='flex justify-between mb-4'>
 								<div className='flex gap-4 items-center mb-2'>
@@ -103,7 +105,7 @@ function YourSuggestions() {
 								<h1 className='font-bold mb-4 xxxs:text-xl md:text-2xl lg:text-3xl'>
 									Suggestion
 								</h1>
-								<p className='xxxxs:text-md md:text-sm xl:text-xl'>
+								<p className='xxxxs:text-md md:text-sm xl:text-md'>
 									{!isLoading ? (
 										suggestion?.suggestion
 									) : (
