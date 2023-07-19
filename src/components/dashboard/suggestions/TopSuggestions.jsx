@@ -1,31 +1,34 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { buildUrl } from "../../../utils/buildUrl";
+import { getToken } from "../../../helpers/getToken";
+
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
+import { MdPageview } from "react-icons/md";
 import { BiSolidUserRectangle } from "react-icons/bi";
 import { TbSquareRoundedArrowUpFilled } from "react-icons/tb";
+import { FaComments } from "react-icons/fa";
 
-import { getUserID } from "../../../helpers/getDataFromLocal.js";
-import { getToken } from "../../../helpers/getToken.js";
-
-import { FaTrashCan, FaComments } from "react-icons/fa6";
-
-import { getAllOfYourSuggestions } from "../../../utils/fetchers/GetAllSuggestions.js";
-
-function YourSuggestions() {
+function TopSuggestions() {
 	const TOKEN = getToken();
-	const userID = getUserID();
-	const [data, setData] = useState([]);
+	const [topSug, setTopSug] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
-	const fetchAllOfYourSuggestions = async () => {
+	const getTopSug = async () => {
 		setIsLoading(true);
 		try {
-			getAllOfYourSuggestions(userID, TOKEN)
+			await fetch(buildUrl("/sug/top-suggestions"), {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${TOKEN}`,
+				},
+			})
 				.then((res) => res.json())
 				.then((data) => {
-					setData(data);
-					console.log(data);
+					setTopSug(data.topSuggestions);
 					setTimeout(() => {
 						setIsLoading(false);
 					}, 1500);
@@ -35,54 +38,31 @@ function YourSuggestions() {
 		}
 	};
 
-	const deleteSuggestion = async (userID, sugID) => {
-		const URL = import.meta.env.DEV ? `http://localhost:3002/api` : `/api`;
-
-		console.log(URL + `/sug/delete-suggestion/${userID}/${sugID}`);
-		try {
-			await fetch(URL + `/sug/delete-suggestion/${userID}/${sugID}`, {
-				method: "DELETE",
-				headers: {
-					Authorization: `Bearer ${TOKEN}`,
-					"Content-Type": "application/json",
-				},
-			})
-				.then((res) => res.json())
-				.then((data) => {
-					console.log(data);
-					fetchAllOfYourSuggestions();
-				});
-		} catch (err) {
-			console.log(err);
-		}
-	};
-
 	useEffect(() => {
-		document.title = "Your Suggestions | CCISLSG Suggestion Board";
-		fetchAllOfYourSuggestions();
+		getTopSug();
 	}, []);
-
 	return (
-		<div className='w-full xxxs:flex flex-col gap-4 lg:grid grid-cols-3 xl:grid grid-cols-4 gap-4'>
-			{data?.yourSuggestions ? (
-				data?.yourSuggestions?.map((suggestion) => {
-					return (
+		<div className=''>
+			<h1 className='font-bold text-4xl mb-8 xxxxs:mt-10 md:mt-32'>
+				Top 5 Suggestions
+			</h1>
+			<div className='xxxxs:flex flex-col gap-4 lg:grid grid-cols-5 gap-4'>
+				{topSug.length !== 0 ? (
+					topSug.map((suggestion) => (
 						<div
 							key={suggestion?._id}
-							className='border border-zinc-300 rounded-md shadow-md xxxxs:p-2 md:p-4'
-							style={{ minHeight: "150px", maxHeight: "650px" }}>
+							className='border border-zinc-300 rounded-md shadow-md xxxxs:p-2 md:p-4'>
 							<div className='flex justify-between mb-4'>
 								<div className='flex gap-4 items-center mb-2'>
 									<BiSolidUserRectangle size={30} />
-									<h1 className='font-semibolf'>{data?.user?.username}</h1>
 								</div>
-								<button onClick={() => deleteSuggestion(userID, suggestion?._id)}>
-									<FaTrashCan
+								<Link to={`/suggestion/${suggestion?._id}`}>
+									<MdPageview
 										size={40}
 										className='bg-white text-primary border border-[#FF7800] rounded-full p-2 cursor-pointer hover:bg-primary hover:text-white hover:
 										window.location.reload();  duration-200'
 									/>
-								</button>
+								</Link>
 							</div>
 							<div className='flex gap-4 items-center bg-primary px-4 py-2 rounded-md text-white'>
 								<h1 className='font-bold xxxs:text-lg md:text-xl lg:text-2xl'>
@@ -100,7 +80,7 @@ function YourSuggestions() {
 								</h1>
 							</div>
 							<div className='flex flex-col gap-2 mt-6'>
-								<h1 className='font-bold mb-4 xxxs:text-xl md:text-2xl lg:text-3xl'>
+								<h1 className='font-bold mb-6 xxxs:text-xl md:text-2xl lg:text-3xl'>
 									Suggestion
 								</h1>
 								<p className='xxxxs:text-md md:text-sm xl:text-xl'>
@@ -163,15 +143,13 @@ function YourSuggestions() {
 								</div>
 							</div>
 						</div>
-					);
-				})
-			) : (
-				<h1 className='font-bold text-center text-primary xxxs:text-xl lg:text-5xl'>
-					No Suggestions
-				</h1>
-			)}
+					))
+				) : (
+					<h1>No Suggestions Yet</h1>
+				)}
+			</div>
 		</div>
 	);
 }
 
-export default YourSuggestions;
+export default TopSuggestions;

@@ -35,37 +35,43 @@ function LatestSug() {
 		current.current.value = currentDate;
 
 		setDateTomorrow(currentDate);
+		console.log(dateTomorrow);
 	}, [sugDate]);
 
 	return (
 		<div className='pt-10'>
 			<h1>
-				Last Suggestion Created at:{" "}
 				<span className='font-bold'>
 					{sugDate
-						? new Date(sugDate).toLocaleDateString("en-US", {
-								hour: "numeric",
-								minute: "numeric",
-								second: "numeric",
-								month: "long",
-								day: "numeric",
-								year: "numeric",
-						  })
+						? `Last Suggestion Created at: ${new Date(sugDate).toLocaleDateString(
+								"en-US",
+								{
+									hour: "numeric",
+									minute: "numeric",
+									second: "numeric",
+									month: "long",
+									day: "numeric",
+									year: "numeric",
+								}
+						  )}`
 						: "Have not suggested yet"}
 				</span>
 			</h1>
 			<div>
 				<h1>
-					New Suggestion input will be on{" "}
 					<span className='font-bold'>
-						{new Date(dateTomorrow).toLocaleDateString("en-US", {
-							hour: "numeric",
-							minute: "numeric",
-							second: "numeric",
-							month: "long",
-							day: "numeric",
-							year: "numeric",
-						})}
+						{dateTomorrow != "Invalid Date"
+							? `New Suggestion input will be on ${new Date(
+									dateTomorrow
+							  ).toLocaleDateString("en-US", {
+									hour: "numeric",
+									minute: "numeric",
+									second: "numeric",
+									month: "long",
+									day: "numeric",
+									year: "numeric",
+							  })}`
+							: null}
 					</span>
 				</h1>
 				<div className='flex gap-2'>

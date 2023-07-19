@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getToken } from "../../helpers/getToken.js";
 
 //components
+import TopSuggestions from "../../components/dashboard/suggestions/TopSuggestions.jsx";
 
 import Creds from "../../components/dashboard/Creds.jsx";
 
@@ -18,6 +19,7 @@ function AllSuggestions() {
 	return (
 		<div>
 			<Creds />
+			<TopSuggestions />
 		</div>
 	);
 }

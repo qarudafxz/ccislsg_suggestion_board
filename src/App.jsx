@@ -17,6 +17,7 @@ import Preloader from "./pages/Preloader";
 //components
 import SideNavbar from "./components/side-navbar/SideNavbar";
 import Head from "./components/Head";
+import ViewSuggestion from "./pages/suggestions/ViewSuggestion";
 
 function App() {
 	const [loading, setLoading] = useState(true);
@@ -68,6 +69,10 @@ function App() {
 										<Route
 											path='/report'
 											element={<ReportBug />}
+										/>
+										<Route
+											path='/suggestion/:id'
+											element={<ViewSuggestion />}
 										/>
 									</Routes>
 								</div>
