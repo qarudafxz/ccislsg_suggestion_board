@@ -124,7 +124,9 @@ function SideNavbar() {
 											</NavLink>
 										)}
 										{idx === MENU.length - 1 && (
-											<button className='group flex gap-4 place-content-center border border-white rounded-full px-4 py-2 hoverBtn text-white w-9/12 mx-auto group-hover:font-bold'>
+											<button
+												className='group flex gap-4 place-content-center border border-white rounded-full px-4 py-2 hoverBtn text-white w-9/12 mx-auto group-hover:font-bold'
+												onClick={LOGOUT.fun}>
 												{LOGOUT.title}
 												<motion.div
 													whileHover={{ x: -10 }}
