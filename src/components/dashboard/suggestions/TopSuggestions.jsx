@@ -30,8 +30,7 @@ function TopSuggestions() {
 				.then((res) => res.json())
 				.then((data) => {
 					setTopSug(data.topSuggestions);
-					setUsername(data.user.username);
-					console.log(data);
+					setUsername(data.username);
 					setTimeout(() => {
 						setIsLoading(false);
 					}, 1500);
@@ -120,7 +119,9 @@ function TopSuggestions() {
 									</h1>
 								</div>
 								<div className='flex gap-2 items-center'>
-									<TbSquareRoundedArrowUpFilled size={30} />
+									<button className='hover:text-primary duration-200'>
+										<TbSquareRoundedArrowUpFilled size={30} />
+									</button>
 									<h1>
 										{!isLoading ? (
 											suggestion?.upVotes

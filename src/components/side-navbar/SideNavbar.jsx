@@ -65,7 +65,7 @@ function SideNavbar() {
 									})}
 
 									<button
-										className='border border-white rounded-full px-4 py-2 hoverBtn text-white w-9/12 mx-auto'
+										className='mt-96 border border-white rounded-full px-4 py-2 hoverBtn text-white w-9/12 mx-auto'
 										onClick={LOGOUT.fun}>
 										{LOGOUT.title}
 									</button>
@@ -86,8 +86,12 @@ function SideNavbar() {
 					)}
 				</AnimatePresence>
 				{/* pc */}
-				<div className='xxxxs:hidden md:block'>
-					<div className='flex flex-col gap-8 pt-4 bg-[#1B1B1B] w-80 h-screen'>
+				<div className='xxxxs:hidden md:block sticky'>
+					<div
+						className='flex flex-col gap-8 pt-4 bg-[#1B1B1B] w-80'
+						style={{
+							height: "135vh",
+						}}>
 						<img
 							src={Logo}
 							alt='CCISLSG Logo'
@@ -126,7 +130,7 @@ function SideNavbar() {
 							);
 						})}
 						<button
-							className='flex gap-4 place-content-center border border-white rounded-full px-4 py-2 hoverBtn text-white w-9/12 mx-auto hover:font-bold'
+							className='mt-96 flex gap-4 place-content-center border border-white rounded-full px-4 py-2 hoverBtn text-white w-9/12 mx-auto hover:font-bold'
 							onClick={LOGOUT.fun}>
 							<motion.div
 								whileHover={{ x: -10 }}

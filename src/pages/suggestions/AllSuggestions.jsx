@@ -7,6 +7,8 @@ import TopSuggestions from "../../components/dashboard/suggestions/TopSuggestion
 
 import Creds from "../../components/dashboard/Creds.jsx";
 
+import AllSuggestion from "../../components/dashboard/suggestions/AllSuggestion.jsx";
+
 function AllSuggestions() {
 	const navigate = useNavigate();
 	useEffect(() => {
@@ -20,6 +22,8 @@ function AllSuggestions() {
 		<div>
 			<Creds />
 			<TopSuggestions />
+			{/* all suggestions' pagination */}
+			<AllSuggestion />
 		</div>
 	);
 }

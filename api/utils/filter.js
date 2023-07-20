@@ -1,8 +1,6 @@
 export const filter = [
 	"arse",
 	"arsehole",
-	"ass",
-	"asshole",
 	"balls",
 	"bastard",
 	"beaver",
@@ -39,7 +37,6 @@ export const filter = [
 	"goddam",
 	"goddamn",
 	"godsdamn",
-	"hell",
 	"holy shit",
 	"horseshit",
 	"jesus christ",

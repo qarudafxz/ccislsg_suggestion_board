@@ -106,7 +106,7 @@ export const deleteSuggestion = async (req, res) => {
 	const { userID, sugID } = req.params;
 
 	try {
-		const user = await User.findOne({ _id: userID });
+		const user = await User.findOneAndUpdate({ _id: userID });
 
 		if (!user) {
 			return res.status(400).json({ message: "User does not exist" });
@@ -118,9 +118,10 @@ export const deleteSuggestion = async (req, res) => {
 			return res.status(400).json({ message: "Suggestion does not exist" });
 		}
 
-		user.numberOfSuggestions = user.numberOfSuggestions - 1;
+		console.log(user);
 
-		await sug.save();
+		user.numberOfSuggestions -= 1;
+
 		await user.save();
 
 		console.log(user.numberOfSuggestions);
@@ -129,6 +130,22 @@ export const deleteSuggestion = async (req, res) => {
 	} catch (err) {
 		console.log(err);
 		return res.status(500).json({ message: "Server Error" });
+	}
+};
+
+//get all suggestions
+
+export const getAllSuggestions = async (req, res) => {
+	try {
+		const suggestions = await Sug.find();
+
+		if (!suggestions) {
+			return res.status(400).json({ message: "No suggestions found" });
+		}
+
+		return res.status(200).json({ suggestions, message: "Suggestions found" });
+	} catch (err) {
+		console.log(err);
 	}
 };
 
@@ -161,8 +178,6 @@ export const getTopSuggestions = async (req, res) => {
 //get latest suggestion from user
 export const getLatestSug = async (req, res) => {
 	const { userID } = req.query;
-
-	console.log(userID);
 
 	try {
 		const user = await User.findOne({ _id: userID });
