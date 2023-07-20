@@ -45,11 +45,11 @@ function TopSuggestions() {
 	}, []);
 	return (
 		<div className=''>
-			<h1 className='font-bold text-4xl mb-8 xxxxs:mt-10 md:mt-32'>
+			<h1 className='font-bold text-4xl mb-8 xxxxs:mt-10 md:mt-16'>
 				Top 3 Suggestions
 			</h1>
 			<div className='bg-primary p-4 rounded-md w-full xxxs:flex flex-col gap-10 xl:grid grid-cols-2 xxl:grid grid-cols-3'>
-				{topSug.length !== 0 ? (
+				{topSug?.length !== 0 ? (
 					topSug.map((suggestion) => (
 						<div
 							key={suggestion?._id}
