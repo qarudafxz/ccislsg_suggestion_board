@@ -154,7 +154,7 @@ function AllSuggestion() {
 			</div>
 
 			{totalPages > 1 && (
-				<div className='mt-20 flex justify-center'>
+				<div className='mt-20 mb-10 flex justify-center'>
 					<ul className='flex items-center bg-white'>
 						{Array.from({ length: totalPages }, (_, index) => index + 1).map(
 							(page) => (
