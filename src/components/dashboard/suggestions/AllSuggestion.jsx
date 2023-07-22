@@ -49,7 +49,7 @@ function AllSuggestion() {
 	return (
 		<div className='mt-10'>
 			<h1 className='font-bold text-4xl mb-8'>All Suggestions</h1>
-			<div className='xxxs:flex flex-col gap-10 xl:grid grid-cols-2 xxl:grid grid-cols-3'>
+			<div className='xxxs:flex flex-col gap-10 xl:grid grid-cols-2 xxl:grid-cols-3'>
 				{currentSug &&
 					currentSug.map((suggestion) => {
 						return (

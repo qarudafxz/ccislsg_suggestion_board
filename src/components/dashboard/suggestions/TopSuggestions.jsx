@@ -45,14 +45,14 @@ function TopSuggestions() {
 	return (
 		<div className=''>
 			<h1 className='font-bold text-4xl mb-8 xxxxs:mt-10 md:mt-16'>
-				Top 3 Suggestions
+				Top 4 Suggestions
 			</h1>
-			<div className='bg-primary p-4 rounded-md w-full xxxs:flex flex-col gap-10 xl:grid grid-cols-2 xxl:grid grid-cols-3'>
+			<div className=' rounded-md w-full xxxs:flex flex-col gap-10 xl:grid grid-cols-2'>
 				{topSug?.length !== 0 ? (
 					topSug.map((suggestion) => (
 						<div
 							key={suggestion?._id}
-							className='bg-white rounded-md shadow-md xxxxs:p-2 md:p-4'>
+							className='bg-white rounded-md border border-zinc-300 shadow-2xl xxxxs:p-2 md:p-4'>
 							<div className='flex justify-between mb-4'>
 								<div className='flex gap-4 items-center mb-2'>
 									<BiSolidUserRectangle size={30} />

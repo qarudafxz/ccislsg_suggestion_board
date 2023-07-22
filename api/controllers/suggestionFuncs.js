@@ -167,7 +167,7 @@ export const getTopSuggestions = async (req, res) => {
 
 		const topSuggestions = suggestions
 			.sort((a, b) => b.upVotes - a.upVotes)
-			.slice(0, 3);
+			.slice(0, 4);
 
 		console.log(user);
 
@@ -292,7 +292,7 @@ export const topUsers = async (req, res) => {
 
 		const top5 = user
 			.sort((a, b) => b.numberOfSuggestions - a.numberOfSuggestions)
-			.splice(0, 5);
+			.splice(0, 10);
 
 		return res
 			.status(200)

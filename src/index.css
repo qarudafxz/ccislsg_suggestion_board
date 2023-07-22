@@ -60,3 +60,43 @@
 .textColor {
   color: #FF7800;
 }
+
+.changeColor {
+  animation: changeColor 10s infinite;
+}
+
+@keyframes changeColor {
+  0% {
+    color: red;
+  }
+  10% {
+    color: blue;
+  }
+  20% {
+    color: violet,
+  } 
+  30% {
+    color: blueviolet;
+  }
+  40% {
+    color: skyblue;
+  }
+  50% {
+    color: lightgreen;
+  }
+  60% {
+    color: greenyellow;
+  }
+  70% {
+    color: yellow;
+  }
+  80% {
+    color: orange;
+  }
+  90% {
+    color: orangered;
+  }
+  100% {
+    color: red;
+  }
+}

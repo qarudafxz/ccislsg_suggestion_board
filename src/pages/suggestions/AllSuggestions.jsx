@@ -8,6 +8,7 @@ import TopSuggestions from "../../components/dashboard/suggestions/TopSuggestion
 import Creds from "../../components/dashboard/Creds.jsx";
 
 import AllSuggestion from "../../components/dashboard/suggestions/AllSuggestion.jsx";
+import TopUsers from "../../components/TopUsers.jsx";
 
 function AllSuggestions() {
 	const navigate = useNavigate();
@@ -21,9 +22,14 @@ function AllSuggestions() {
 	return (
 		<div>
 			<Creds />
-			<TopSuggestions />
-			{/* all suggestions' pagination */}
-			<AllSuggestion />
+			<div>
+				<div className='xxxxs:flex flex-col-reverse gap-14 lg:flex-row'>
+					<TopSuggestions />
+					{/* all suggestions' pagination */}
+					<TopUsers />
+				</div>
+				<AllSuggestion />
+			</div>
 		</div>
 	);
 }
