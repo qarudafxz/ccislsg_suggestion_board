@@ -106,7 +106,7 @@ export const deleteSuggestion = async (req, res) => {
 	const { userID, sugID } = req.params;
 
 	try {
-		const user = await User.findOneAndUpdate({ _id: userID });
+		const user = await User.findOne({ _id: userID });
 
 		if (!user) {
 			return res.status(400).json({ message: "User does not exist" });
@@ -255,5 +255,45 @@ export const addComment = async (req, res) => {
 	} catch (err) {
 		console.log(err);
 		return res.status(500).json({ message: "Server Error" });
+	}
+};
+
+//get user details
+
+export const getUserDetails = async (req, res) => {
+	try {
+		console.log(req.params.id);
+		const user = await User.findOne({ _id: req.params.id });
+		if (!user) {
+			return res.status(400).json({ message: "User does not exist" });
+		}
+
+		return res.status(200).json({ user });
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json({ message: "Server error" });
+	}
+};
+
+// top users counted by the number of suggestions
+
+export const topUsers = async (req, res) => {
+	try {
+		const user = await User.find({});
+
+		if (!user) {
+			return res.status(400).json({ message: "No single user found" });
+		}
+
+		const top5 = user
+			.sort((a, b) => b.numberOfSuggestions - a.numberOfSuggestions)
+			.splice(0, 5);
+
+		return res
+			.status(200)
+			.json({ top5, message: "Top 5 users fetched successfully" });
+	} catch (err) {
+		console.log(err);
+		return res.status(500).json({ message: "Server error" });
 	}
 };

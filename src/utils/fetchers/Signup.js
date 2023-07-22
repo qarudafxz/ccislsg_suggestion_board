@@ -1,6 +1,6 @@
 import { buildUrl } from "../buildUrl.js";
 
-export const authSignup = async (username, email, password) => {
+export const authSignup = async (username, email, password, course) => {
 	const URL = buildUrl(`/auth/signup`);
 
 	return await fetch(URL, {
@@ -8,6 +8,6 @@ export const authSignup = async (username, email, password) => {
 		headers: {
 			"Content-Type": "application/json",
 		},
-		body: JSON.stringify({ username, email, password }),
+		body: JSON.stringify({ username, email, password, course }),
 	});
 };

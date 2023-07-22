@@ -24,7 +24,7 @@ const messages = [
 ];
 
 export const register = async (req, res) => {
-	const { username, email, password } = req.body;
+	const { username, email, password, course } = req.body;
 	try {
 		const isEmailValid = email.includes("@carsu.edu.ph");
 
@@ -44,7 +44,12 @@ export const register = async (req, res) => {
 		const genSalt = 10;
 		const hashedPassword = await bcrypt.hash(password, genSalt);
 
-		const newUser = new User({ username, email, password: hashedPassword });
+		const newUser = new User({
+			username,
+			email,
+			password: hashedPassword,
+			course,
+		});
 		await newUser.save();
 
 		const payload = {

@@ -7,15 +7,21 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { authSignup } from "../utils/fetchers/Signup.js";
 
+import Dropdown from "react-dropdown";
+import "react-dropdown/style.css";
+
 import Logo from "../assets/logo.png";
 function Signup() {
 	const TOKEN = getToken();
 	const navigate = useNavigate();
 	const [progress, setProgress] = useState(0);
+	const [course, setCourse] = useState("");
 
 	const usernameRef = useRef();
 	const emailInputRef = useRef();
 	const passwordInputRef = useRef();
+
+	const courses = ["BSIT", "BSCS", "BSIS"];
 
 	const successful = async (res) => {
 		setProgress(80);
@@ -60,7 +66,7 @@ function Signup() {
 		const password = passwordInputRef?.current?.value;
 
 		setProgress(30);
-		if (!username || !email || !password) {
+		if (!username || !email || !password || !course) {
 			toast.error("Input all fields", {
 				position: "top-center",
 				autoClose: 2000,
@@ -75,7 +81,7 @@ function Signup() {
 			return;
 		}
 		try {
-			authSignup(username, email, password).then((res) => {
+			authSignup(username, email, password, course).then((res) => {
 				switch (res.status) {
 					case 200:
 						successful(res);
@@ -166,6 +172,16 @@ function Signup() {
 							ref={passwordInputRef}
 						/>
 					</div>
+					<div className='flex flex-col mt-4'>
+						<label htmlFor='course'>Course</label>
+						<Dropdown
+							className='w-full mt-4 rounded-md text-primary focus:outline-none'
+							options={courses}
+							onChange={(courses) => setCourse(courses?.value)}
+							placeholder='Select Course'
+						/>
+					</div>
+
 					<button
 						onClick={handleSignup}
 						className='w-full bg-primary py-2 text-center text-white font-semibold rounded-md mt-4'>
