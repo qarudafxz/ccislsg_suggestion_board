@@ -61,7 +61,9 @@ function TopUsers() {
 							} xxxxs:font-semibold`}>
 							<h1>
 								<span className='font-thin'>{idx + 1}.</span> {user.username}{" "}
-								{user._id === userID && "(You)"}
+								<span className='font-thin text-xs text-zinc-500'>
+									{user._id === userID && "(You)"}
+								</span>
 							</h1>
 							<p>{user?.numberOfSuggestions}</p>
 						</div>
