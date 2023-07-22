@@ -16,7 +16,7 @@ import Preloader from "./pages/Preloader";
 
 //components
 import SideNavbar from "./components/side-navbar/SideNavbar";
-import Head from "./components/Head";
+import NewHead from "./components/NewHead";
 import ViewSuggestion from "./pages/suggestions/ViewSuggestion";
 
 function App() {
@@ -53,7 +53,7 @@ function App() {
 					path='/*'
 					element={
 						<div>
-							<Head />
+							<NewHead />
 							<div className='font-main md:flex flex-col gap-4'>
 								<SideNavbar />
 								<div className='xxxs:px-6 xxxs:px-8 xs:px-10 md:px-16'>
