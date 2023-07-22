@@ -52,7 +52,12 @@ export const addSuggestion = async (req, res) => {
 		} else {
 			user.numberOfSuggestions += 1;
 
-			const newSuggestion = new Sug({ creatorID: user._id, subject, suggestion });
+			const newSuggestion = new Sug({
+				creatorID: user._id,
+				creatorName: user.username,
+				subject,
+				suggestion,
+			});
 
 			await newSuggestion.save();
 			await user.save();

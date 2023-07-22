@@ -9,6 +9,10 @@ const sugSchema = new mongoose.Schema(
 			ref: "users",
 			required: true,
 		},
+		creatorName: {
+			type: "String",
+			required: true,
+		},
 		subject: { type: String, required: true },
 		suggestion: { type: String, required: true },
 		upVotes: { type: Number, default: 0 },

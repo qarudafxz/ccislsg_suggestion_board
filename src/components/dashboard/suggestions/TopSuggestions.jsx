@@ -30,7 +30,6 @@ function TopSuggestions() {
 				.then((res) => res.json())
 				.then((data) => {
 					setTopSug(data.topSuggestions);
-					setUsername(data.username);
 					setTimeout(() => {
 						setIsLoading(false);
 					}, 1500);
@@ -57,7 +56,7 @@ function TopSuggestions() {
 							<div className='flex justify-between mb-4'>
 								<div className='flex gap-4 items-center mb-2'>
 									<BiSolidUserRectangle size={30} />
-									<h1>{username}</h1>
+									<h1>{suggestion.creatorName}</h1>
 								</div>
 								<Link to={`/suggestion/${suggestion?._id}`}>
 									<MdPageview
