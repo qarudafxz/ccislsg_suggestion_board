@@ -126,7 +126,7 @@ function Login() {
 				{message && <p>{message}</p>}
 				<form
 					onSubmit={handleLogin}
-					className='xxxs:mt-56 px-8 xs:w-full md:w-10/12 lg:w-5/12'>
+					className='xxxxs:mt-32 md:mt-36 lg:mt-44 px-8 xs:w-full md:w-10/12 lg:w-5/12'>
 					<Link to='/'>
 						<img
 							src={logo}

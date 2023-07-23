@@ -32,7 +32,7 @@ function Home() {
 			<Head />
 			<Navbar />
 			<div className='pointer-events-none xxxs:px-10 md:px-32'>
-				<div className='flex flex-col gap-4 mt-10 md:mt-52'>
+				<div className='flex flex-col gap-4 mt-10 md:mt-24 lg:mt-32 xxl:mt-44'>
 					<motion.div
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
@@ -57,7 +57,7 @@ function Home() {
 						initial={{ opacity: 0 }}
 						animate={{ opacity: 1 }}
 						transition={{ delay: 1.4, duration: 1 }}>
-						<p className='text-zinc-800 xxxs:text-left lg:text-center xl:w-6/12 text-lg mx-auto'>
+						<p className='text-zinc-800 xxxs:text-left text-sm lg:text-center xl:w-6/12 text-lg mx-auto'>
 							Provide your suggestions to the Local Student Government on how the
 							government can take effective measures to bring about positive
 							improvements for the college.

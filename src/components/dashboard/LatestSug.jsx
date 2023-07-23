@@ -74,7 +74,7 @@ function LatestSug() {
 							: null}
 					</span>
 				</h1>
-				<div className='flex gap-2'>
+				<div className='xxxxs:flex flex-col sm:flex-row gap-2'>
 					<h1>
 						Date & Time Now:{" "}
 						<span className='font-bold'>

@@ -190,7 +190,7 @@ function AddSuggestion({ ...props }) {
 								delay: 0.5,
 								ease: [0, 0.71, 0.2, 1.01],
 							}}
-							className='flex flex-col gap-4 p-10 bg-white absolute z-10 left-62 top-42 bg-blend-overlay shadow-2xl xxxxs:w-10/12 md:w-7/12 lg:w-5/12'>
+							className='flex flex-col gap-2 p-10 bg-white absolute z-10 left-62 top-42 bg-blend-overlay shadow-2xl xxxxs:w-10/12 md:w-7/12 lg:w-5/12'>
 							<div className='flex justify-end items-center gap-4'>
 								<button
 									className='text-primary'
@@ -198,17 +198,21 @@ function AddSuggestion({ ...props }) {
 									<AiFillCloseCircle size={40} />
 								</button>
 							</div>
-							<div className='flex flex-col justify-between gap-6'>
+							<div className='flex flex-col justify-between gap-2'>
 								<label htmlFor={subject}>Subject</label>
 								<input
 									type='text'
 									className='py-2 pl-4 rounded-md border border-zinc-400'
 									onChange={(e) => setSubject(e.target.value)}
 								/>
-								<label htmlFor={suggestionRef}>Suggestion</label>
+								<label
+									htmlFor={suggestionRef}
+									className='mt-4'>
+									Suggestion
+								</label>
 								<textarea
 									type='text'
-									className='py-2 pl-4 rounded-md border border-zinc-400 h-96'
+									className='py-2 pl-4 rounded-md border border-zinc-400 h-56'
 									ref={suggestionRef}
 									onInput={() => checkMaximumText()}
 								/>

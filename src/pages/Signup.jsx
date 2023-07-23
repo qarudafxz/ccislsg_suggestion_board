@@ -136,7 +136,7 @@ function Signup() {
 				theme='light'
 			/>
 			<div className='xxxxs:flex flex-col gap-4 md:w-full h-screen grid place-items-center'>
-				<form className='xxxs:mt-56 px-8 xs:w-full md:w-10/12 lg:w-4/12'>
+				<form className='xxxxs:mt-8 lg:mt-20 xl:mt-32 px-8 xs:w-full md:w-10/12 lg:w-4/12'>
 					<img
 						src={Logo}
 						alt='CCISLSG Logo'

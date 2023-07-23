@@ -64,15 +64,14 @@ function YourSuggestions() {
 
 	return (
 		<div
-			className='w-full mb-12 xxxs:flex flex-col gap-10 xl:grid grid-cols-2 xxl:grid grid-cols-3'
-			style={{ maxHeight: "1250px" }}>
+			className='mb-10 xxxs:flex flex-col gap-10 xl:grid grid-cols-2 xxl:grid-cols-3'
+			style={{ maxHeight: "2000px" }}>
 			{data?.yourSuggestions ? (
 				data?.yourSuggestions?.map((suggestion) => {
 					return (
 						<div
 							key={suggestion?._id}
-							className='w-full border border-zinc-300 rounded-md shadow-md xxxxs:p-2 md:p-4'
-							style={{ minHeight: "150px", maxHeight: "2500px" }}>
+							className='w-full border border-zinc-300 rounded-md shadow-md xxxxs:p-2 md:p-4'>
 							<div className='flex justify-between mb-4'>
 								<div className='flex gap-4 items-center mb-2'>
 									<BiSolidUserRectangle size={30} />
