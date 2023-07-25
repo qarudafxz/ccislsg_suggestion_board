@@ -238,11 +238,11 @@ export const addComment = async (req, res) => {
 	const { comment } = req.body;
 
 	try {
-		const user = await User.findOne({ _id: creatorID });
+		// const user = await User.findOne({ _id: req.params.creatorID });
 
-		if (!user) {
-			return res.status(400).json({ message: "User does not exist" });
-		}
+		// if (!user) {
+		// 	return res.status(400).json({ message: "User does not exist" });
+		// }
 
 		const sug = await Sug.findOne({ _id: sugID });
 
@@ -250,11 +250,23 @@ export const addComment = async (req, res) => {
 			return res.status(400).json({ message: "Suggestion does not exist" });
 		}
 
+		sug.numberOfComments += 1;
+
 		const commentToLower = comment.toLowerCase();
 
 		if (filterWords(commentToLower)) {
 			return res.status(400).json({ message: "Please do not use swear words" });
 		}
+
+		const newComment = new Comments({
+			creatorID,
+			suggestionID: sugID,
+			// creatorName: user.username,
+			comment,
+		});
+
+		await sug.save();
+		await newComment.save();
 
 		return res.status(200).json({ message: "Comment successfully added" });
 	} catch (err) {
@@ -299,6 +311,52 @@ export const topUsers = async (req, res) => {
 			.json({ top5, message: "Top 5 users fetched successfully" });
 	} catch (err) {
 		console.log(err);
+		return res.status(500).json({ message: "Server error" });
+	}
+};
+
+export const getOneSugBasedOnId = async (req, res) => {
+	const { id } = req.params;
+
+	try {
+		const suggestion = await Sug.findOne({ _id: id });
+
+		if (!suggestion) {
+			return res.status(400).json({ message: "Suggestion does not exist" });
+		}
+
+		const comments = await Comments.find({ suggestionID: id });
+
+		if (!comments) {
+			return res.status(400).json({ message: "No comments found" });
+		}
+
+		return res
+			.status(200)
+			.json({ suggestion, comments, message: "Suggestion found" });
+	} catch (err) {
+		console.error(err);
+		return res.status(500).json({ message: "Server error" });
+	}
+};
+
+export const castUpvote = async (req, res) => {
+	const { id } = req.params;
+	try {
+		//add +1 to the upvotes
+		const suggestion = await Sug.findOneAndUpdate(
+			{ _id: id },
+			{ $inc: { upVotes: 1 } },
+			{ new: true }
+		);
+
+		if (!suggestion) {
+			return res.status(400).json({ message: "Suggestion does not exist" });
+		}
+
+		return res.status(200).json({ suggestion, message: "Upvote casted" });
+	} catch (err) {
+		console.error(err);
 		return res.status(500).json({ message: "Server error" });
 	}
 };

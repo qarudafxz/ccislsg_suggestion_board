@@ -3,6 +3,7 @@ import express from "express";
 //controllers
 import {
 	addSuggestion,
+	addComment,
 	editSuggestion,
 	getAllSuggestions,
 	getTopSuggestions,
@@ -11,6 +12,7 @@ import {
 	deleteSuggestion,
 	getUserDetails,
 	topUsers,
+	getOneSugBasedOnId,
 } from "../controllers/suggestionFuncs.js";
 
 //middlewares
@@ -22,11 +24,13 @@ const router = express.Router();
 router.get("/user/:id", getUserDetails);
 router.get("/top-suggestions", isAuthenticated, getTopSuggestions);
 router.get("/get-latest-sug/", isAuthenticated, getLatestSug);
+router.get("/get-suggest/:id", getOneSugBasedOnId);
 router.get("/your-suggestions", getYourSuggestions);
 router.get("/all", getAllSuggestions);
 router.get("/top-5", topUsers);
 
 router.post("/suggest/:id", isAuthenticated, addSuggestion);
+router.post("/add-comment/:userID/:sugID", addComment);
 
 router.put("/edit-suggest/:id", isAuthenticated, editSuggestion);
 
