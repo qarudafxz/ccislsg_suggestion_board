@@ -24,11 +24,11 @@ function ViewSuggestion() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [progress, setProgress] = useState(0);
 	const [username, setUsername] = useState(null);
-
+	const [comment, setComment] = useState("");
 	const suggestionID = useRef(null);
 	const [comments, setComments] = useState([]);
 	const usernameCur = useRef(username);
-	const commentCur = useRef("");
+	const commentCur = useRef(comment);
 
 	const successful = () => {
 		setProgress(80);
@@ -43,7 +43,23 @@ function ViewSuggestion() {
 			theme: "light",
 		});
 
-		setComments(() => [...comments, { usernameCur, commentCur }]);
+		setComments(() => [...comments, { usernameCur, comment }]);
+		setComment("");
+		return;
+	};
+
+	const failed = (data) => {
+		setProgress(80);
+		toast.error(data.message, {
+			position: "top-center",
+			autoClose: 2000,
+			hideProgressBar: false,
+			closeOnClick: true,
+			pauseOnHover: true,
+			draggable: true,
+			progress: undefined,
+			theme: "light",
+		});
 
 		return;
 	};
@@ -56,6 +72,7 @@ function ViewSuggestion() {
 					method: "GET",
 					headers: {
 						"Content-Type": "application/json",
+						Authorization: `Bearer ${TOKEN}`,
 					},
 				})
 			)
@@ -78,7 +95,7 @@ function ViewSuggestion() {
 		e.preventDefault();
 		setProgress(30);
 
-		if (!commentCur.current.valueOf) {
+		if (!comment) {
 			setProgress(100);
 			toast.error("Please added a comment", {
 				position: "top-center",
@@ -92,27 +109,32 @@ function ViewSuggestion() {
 			});
 			return;
 		}
+
+		const END_POINT = import.meta.env.DEV
+			? `http://localhost:3002/api/sug/add-comment/${creatorID}/${id}`
+			: `/api/sug/add-comment/${creatorID}/${id}`;
+
 		try {
-			await fetch(
-				buildUrl(`/sug/add-comment/${creatorID}/${id}`, {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-						Authorization: `Bearer ${TOKEN}`,
-					},
-					body: JSON.stringify({
-						creatorID,
-						sugID: id,
-						comment: commentCur.current.value,
-					}),
-				})
-			).then((res) => {
+			await fetch(END_POINT, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${TOKEN}`,
+				},
+				body: JSON.stringify({
+					creatorID,
+					sugID: id,
+					comment,
+				}),
+			}).then(async (res) => {
 				switch (res.status) {
 					case 200:
 						successful();
 						break;
 
 					case 400:
+						const data = await res.json();
+						failed(data);
 						break;
 				}
 			});
@@ -173,22 +195,31 @@ function ViewSuggestion() {
 				{/* Comments */}
 				<div className=''>
 					{comments.length > 0 ? (
-						comments?.map((comment) => {
+						comments?.map((comment, idx) => {
 							return (
 								<div
-									key={comment?._id}
+									key={idx}
 									className='flex flex-col'>
 									<div className='flex gap-2'>
 										<h1 className='font-semibold'>{comment?.username}</h1>
 										<h1 className='text-zinc-400'>
-											{new Date(comment?.createdAt).toLocaleString("en-US", {
-												month: "long",
-												day: "numeric",
-												year: "numeric",
-												hour: "numeric",
-												minute: "numeric",
-												second: "numeric",
-											})}
+											{!comment?.createdAt
+												? new Date().toLocaleString("en-US", {
+														month: "long",
+														day: "numeric",
+														year: "numeric",
+														hour: "numeric",
+														minute: "numeric",
+														second: "numeric",
+												  })
+												: new Date(comment.createdAt).toLocaleString("en-US", {
+														month: "long",
+														day: "numeric",
+														year: "numeric",
+														hour: "numeric",
+														minute: "numeric",
+														second: "numeric",
+												  })}
 										</h1>
 										<h1>{comment?.comment}</h1>
 									</div>
@@ -203,7 +234,7 @@ function ViewSuggestion() {
 							type='text'
 							placeholder='Add comment'
 							className='p-2 border border-zinc-300 w-full rounded-md xxxxs:text-sm md:text-lg'
-							ref={commentCur}
+							onChange={(e) => setComment(e.target.value)}
 						/>
 						<button onClick={(e) => postComment(e, userID, suggestionID.current)}>
 							<GrSend

@@ -30,7 +30,7 @@ router.get("/all", getAllSuggestions);
 router.get("/top-5", topUsers);
 
 router.post("/suggest/:id", isAuthenticated, addSuggestion);
-router.post("/add-comment/:userID/:sugID", addComment);
+router.post("/add-comment/:userID/:sugID", isAuthenticated, addComment);
 
 router.put("/edit-suggest/:id", isAuthenticated, editSuggestion);
 
