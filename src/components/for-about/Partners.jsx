@@ -3,6 +3,8 @@ import React from "react";
 import logo from "../../assets/logo.png";
 import parago from "../../assets/parago.svg";
 import aub from "../../assets/aub.png";
+import mc from "../../assets/mc.jpg";
+import mj from "../../assets/mj.jpg";
 
 function Partners() {
 	const images = ["parago", "logo"];
@@ -32,8 +34,30 @@ function Partners() {
 							src={aub}
 							className='w-40'
 						/>
-						<h1 className='text-center font-bold text-2xl'>Aubriel Bolotaolo</h1>
-						<p className='text-center'>Front-end Developer</p>
+						<h1 className='text-center font-bold text-2xl text-orange-950'>
+							Aubriel Bolotaolo
+						</h1>
+						<p className='text-center text-white'>Front-end Developer</p>
+					</div>
+					<div className='flex flex-col justify-center items-center gap-2'>
+						<img
+							src={mj}
+							className='w-40 rounded-full'
+						/>
+						<h1 className='text-center font-bold text-2xl text-orange-950'>
+							MJ Miral
+						</h1>
+						<p className='text-center text-white'>Back-end Developer</p>
+					</div>
+					<div className='flex flex-col justify-center items-center gap-2'>
+						<img
+							src={mc}
+							className='w-40 rounded-full'
+						/>
+						<h1 className='text-center font-bold text-2xl text-orange-950'>
+							Mc Lourence Sinilong
+						</h1>
+						<p className='text-center text-white'>Back-end Developer</p>
 					</div>
 				</div>
 			</div>
