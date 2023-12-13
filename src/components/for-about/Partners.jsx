@@ -2,6 +2,7 @@ import React from "react";
 
 import logo from "../../assets/logo.png";
 import parago from "../../assets/parago.svg";
+import aub from "../../assets/aub.png";
 
 function Partners() {
 	const images = ["parago", "logo"];
@@ -10,13 +11,13 @@ function Partners() {
 		<div className='flex flex-col gap-4 my-20 xxxs:px-10 md:px-32 lg:px-36'>
 			<div className='m-auto'>
 				<h1 className='font-bold text-orange-950 xxxs:text-xl text-center md:text-3xl lg:text-4xl'>
-					Built with our{" "}
+					Built with these skillful{" "}
 					<span className='bg-gradient-to-tr from-from to-to rounded-md text-white px-4'>
-						trusted partners
+						CCIS Students
 					</span>
 				</h1>
 				<div className='flex items-center gap-12 place-content-center mt-14'>
-					{images.map((image, index) => {
+					{/* {images.map((image, index) => {
 						return (
 							<img
 								key={index}
@@ -25,7 +26,15 @@ function Partners() {
 								className='w-20 h-20'
 							/>
 						);
-					})}
+					})} */}
+					<div className='flex flex-col justify-center items-center gap-2'>
+						<img
+							src={aub}
+							className='w-40'
+						/>
+						<h1 className='text-center font-bold text-2xl'>Aubriel Bolotaolo</h1>
+						<p className='text-center'>Front-end Developer</p>
+					</div>
 				</div>
 			</div>
 		</div>

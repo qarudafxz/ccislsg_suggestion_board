@@ -10,7 +10,7 @@ function NewHead() {
 		"Respect and uplift others with your suggestions. Let's create a positive and supportive community.",
 		"Make a greater impact for your college by providing the most pressing suggestions as possible.",
 		"Your voice matters! Every suggestion you make will be carefully reviewed by our LSGs, driving real action.",
-		"This project is created by Francis Tin-aon, a 3rd year BSIT student of CCIS.",
+		// "This project is created by Francis Tin-ao, a 3rd year BSIT student of CCIS.",
 		"We are open for suggestions. If you have any suggestions for this project, please contact us.",
 		"We care for your privacy. We do not collect any personal information from you.",
 		"Your suggestions are anonymous. We do not collect any personal information from you.",
